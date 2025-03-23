@@ -1,0 +1,15 @@
+.loader {
+    &__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: fixed;
+        top: 50%;
+        left: 0%;
+        width: 100vw;
+
+        &>p {
+            font-weight: bold;
+        }
+    }
+}

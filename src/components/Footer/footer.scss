@@ -1,0 +1,31 @@
+.footer {
+    &__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 20vh;
+        background-color: #114b5f;
+    }
+
+    &__nav {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    &__link {
+        opacity: .8;
+        transition: .3s;
+        color: lightgray !important;
+        cursor: pointer;
+        text-decoration: none !important;
+        font-family: "Space Grotesk", sans-serif;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
