@@ -1,0 +1,14 @@
+.media {
+    &__wrapper {
+        width: 85rem;
+        margin: 0 auto;
+    }
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        background: #f4f7f3;
+        background-image: url('/assets/images/bg.png');
+        min-height: 92vh;
+    }
+}
