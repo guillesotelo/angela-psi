@@ -20,5 +20,10 @@
 
 
 @media only screen and (max-width: 640px) {
-    .header {}
+    .header {
+        &__container {
+            width: 90%;
+            margin: auto;
+        }
+    }
 }

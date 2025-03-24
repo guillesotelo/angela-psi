@@ -281,6 +281,12 @@ code {
   opacity: 0.7;
 }
 
+@media only screen and (max-width: 640px) {
+  .header__container {
+    width: 90%;
+    margin: auto;
+  }
+}
 .inputfield__container {
   width: 100%;
 }
@@ -1337,7 +1343,6 @@ code {
   align-items: flex-start;
   gap: 0.5rem;
   width: 100%;
-  position: relative;
 }
 .home__price-group {
   display: flex;
@@ -1374,9 +1379,6 @@ code {
   min-height: fit-content;
   transition: 0.2s;
   transform: translateY(-3%);
-  position: absolute;
-  right: 0;
-  left: 0;
 }
 .home__price-title {
   font-weight: bold;
@@ -1431,6 +1433,11 @@ code {
   min-height: 92vh;
 }
 
+@media only screen and (max-width: 640px) {
+  .media__wrapper {
+    width: 90%;
+  }
+}
 .app__container {
   margin: 0 auto;
   min-height: 90vh;
