@@ -42,8 +42,9 @@ export const AppProvider = ({ children }: Props) => {
     useEffect(() => {
         const body = document.querySelector('body')
         if (body) {
-            body.classList.remove('--dark')
-            if (darkMode) body.classList.add('--dark')
+            // Uncomment to use darkmode in Body
+            // body.classList.remove('--dark')
+            // if (darkMode) body.classList.add('--dark')
 
             document.documentElement.setAttribute(
                 "data-color-scheme",
