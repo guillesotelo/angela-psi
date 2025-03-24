@@ -48,7 +48,7 @@ export default function Button({ label, handleClick, className, bgColor, textCol
             onMouseEnter={() => setButtonStyle({
                 ...style,
                 backgroundColor: 'transparent',
-                color: !darkMode ? isTooBright(bgColor) ? 'black' : bgColor : 'white' || ''
+                color: !darkMode ? isTooBright(bgColor) ? 'black' : bgColor : 'white'
             })}
             onMouseLeave={() => setButtonStyle({
                 ...style,
