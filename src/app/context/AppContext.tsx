@@ -3,20 +3,11 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { AppContextType } from '../types'
 import { verifyToken } from '../../services'
-<<<<<<< HEAD
 import { getUser } from '../../helpers'
-=======
-import { getCountryCode, getUser } from '../../helpers'
->>>>>>> 466042c4f72a4199ae6c01b9f6dcd4b37b17c813
 
 export const AppContext = createContext<AppContextType>({
     isMobile: false,
     isLoggedIn: null,
-<<<<<<< HEAD
-=======
-    lang: '',
-    setLang: () => { },
->>>>>>> 466042c4f72a4199ae6c01b9f6dcd4b37b17c813
     setIsLoggedIn: () => { },
     darkMode: false,
     setDarkMode: () => { },
@@ -27,10 +18,6 @@ type Props = {
 }
 
 export const AppProvider = ({ children }: Props) => {
-<<<<<<< HEAD
-=======
-    const [lang, setLang] = useState<string>('')
->>>>>>> 466042c4f72a4199ae6c01b9f6dcd4b37b17c813
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null)
     const [darkMode, setDarkMode] = useState(false)
@@ -39,19 +26,11 @@ export const AppProvider = ({ children }: Props) => {
     useEffect(() => {
         if (typeof window !== 'undefined') {
             setWindowLoading(false)
-<<<<<<< HEAD
-=======
-            setLang(localStorage.getItem('lang') || 'en')
->>>>>>> 466042c4f72a4199ae6c01b9f6dcd4b37b17c813
         }
         setDarkMode(JSON.parse(localStorage.getItem('preferredMode') || 'false'))
         setIsMobile(isMobileDevice())
 
         verifyUser()
-<<<<<<< HEAD
-=======
-        setDefaultLanguage()
->>>>>>> 466042c4f72a4199ae6c01b9f6dcd4b37b17c813
         getPreferredScheme()
 
         const checkWidth = () => setIsMobile(window.innerWidth <= 768)
