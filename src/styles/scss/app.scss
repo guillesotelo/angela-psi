@@ -41,9 +41,8 @@ h4,
 
     &__container {
         max-width: 82rem;
-        margin: 0 auto 4rem auto;
-        min-height: 90vh;
-        padding: 8vh 2rem;
+        margin: 0 auto;
+        min-height: 100vh;
     }
 
     &__img {
@@ -142,7 +141,6 @@ h4,
         &__container {
             width: 100vw;
             margin: 0;
-            padding: 8vh 0;
         }
 
         &__title {
