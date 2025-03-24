@@ -3,13 +3,11 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { AppContextType } from '../types'
 import { verifyToken } from '../../services'
-import { getCountryCode, getUser } from '../../helpers'
+import { getUser } from '../../helpers'
 
 export const AppContext = createContext<AppContextType>({
     isMobile: false,
     isLoggedIn: null,
-    lang: '',
-    setLang: () => { },
     setIsLoggedIn: () => { },
     darkMode: false,
     setDarkMode: () => { },
@@ -20,7 +18,6 @@ type Props = {
 }
 
 export const AppProvider = ({ children }: Props) => {
-    const [lang, setLang] = useState<string>('')
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null)
     const [darkMode, setDarkMode] = useState(false)
@@ -29,13 +26,11 @@ export const AppProvider = ({ children }: Props) => {
     useEffect(() => {
         if (typeof window !== 'undefined') {
             setWindowLoading(false)
-            setLang(localStorage.getItem('lang') || 'en')
         }
         setDarkMode(JSON.parse(localStorage.getItem('preferredMode') || 'false'))
         setIsMobile(isMobileDevice())
 
         verifyUser()
-        setDefaultLanguage()
         getPreferredScheme()
 
         const checkWidth = () => setIsMobile(window.innerWidth <= 768)
@@ -56,10 +51,6 @@ export const AppProvider = ({ children }: Props) => {
             )
         }
     }, [darkMode])
-
-    useEffect(() => {
-        if (lang) localStorage.setItem('lang', lang)
-    }, [lang])
 
     const isMobileDevice = () => {
         if (typeof window === 'undefined') return false // Server-side check
@@ -83,16 +74,6 @@ export const AppProvider = ({ children }: Props) => {
         setDarkMode(savedMode ? mode : window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches)
     }
 
-    const setDefaultLanguage = async () => {
-        try {
-            const language = localStorage.getItem('lang') || await getCountryCode()
-            setLang(language)
-            localStorage.setItem('lang', language)
-        } catch (error) {
-            console.error(error)
-        }
-    }
-
     const verifyUser = async () => {
         try {
             const verified = await verifyToken(getUser().token)
@@ -110,16 +91,12 @@ export const AppProvider = ({ children }: Props) => {
         isLoggedIn,
         darkMode,
         setDarkMode,
-        lang,
-        setLang,
     }), [
         isMobile,
         setIsLoggedIn,
         isLoggedIn,
         darkMode,
         setDarkMode,
-        lang,
-        setLang,
     ])
 
 

@@ -4,10 +4,6 @@ export type AppContextType = {
     setIsLoggedIn: (value: boolean) => void
     darkMode: boolean
     setDarkMode: (value: boolean) => void
-    lang: string
-    setLang: (value: string) => void
-    setReloadEditions: (value: boolean) => void
-    reloadEditions: boolean
 }
 
 export type onChangeEventType = React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>
