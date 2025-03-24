@@ -75,7 +75,6 @@
             align-items: flex-start;
             gap: .5rem;
             width: 100%;
-            position: relative;
         }
 
         &-group {
@@ -114,9 +113,6 @@
                 min-height: fit-content;
                 transition: .2s;
                 transform: translateY(-3%);
-                position: absolute;
-                right: 0;
-                left: 0;
             }
         }
 
