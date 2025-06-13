@@ -128,3 +128,12 @@ export const retryWithDelay = async <T>(fn: () => Promise<T>, maxAttempts: numbe
 export const pause = (miliseconds?: number) => {
     return new Promise(resolve => setTimeout(resolve, miliseconds || 1000))
 }
+
+export const createSlug = (word: string) => {
+    return word
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-zA-Z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+}

@@ -18,3 +18,13 @@ export type userType = {
     newData?: { [key: string]: string }
     token?: string
 }
+
+export type serviceType = {
+    title: string
+    subtitle: string
+    description: string
+    image: string
+    priceCOP: string
+    priceEUR: string
+    paymentLink: string
+}

@@ -27,31 +27,15 @@ export const AppProvider = ({ children }: Props) => {
         if (typeof window !== 'undefined') {
             setWindowLoading(false)
         }
-        setDarkMode(JSON.parse(localStorage.getItem('preferredMode') || 'false'))
         setIsMobile(isMobileDevice())
 
         verifyUser()
-        getPreferredScheme()
 
         const checkWidth = () => setIsMobile(window.innerWidth <= 768)
 
         window.addEventListener("resize", checkWidth)
         return () => window.removeEventListener("resize", checkWidth)
     }, [])
-
-    useEffect(() => {
-        const body = document.querySelector('body')
-        if (body) {
-            // Uncomment to use darkmode in Body
-            // body.classList.remove('--dark')
-            // if (darkMode) body.classList.add('--dark')
-
-            document.documentElement.setAttribute(
-                "data-color-scheme",
-                darkMode ? "dark" : "light"
-            )
-        }
-    }, [darkMode])
 
     const isMobileDevice = () => {
         if (typeof window === 'undefined') return false // Server-side check
@@ -67,12 +51,6 @@ export const AppProvider = ({ children }: Props) => {
         const isSmallScreen = width <= 768
 
         return isMobile || isSmallScreen
-    }
-
-    const getPreferredScheme = () => {
-        const savedMode = localStorage.getItem('preferredMode')
-        const mode = JSON.parse(localStorage.getItem('preferredMode') || 'false')
-        setDarkMode(savedMode ? mode : window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches)
     }
 
     const verifyUser = async () => {
