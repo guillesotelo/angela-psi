@@ -1,0 +1,60 @@
+.service {
+    &__container {
+        display: flex;
+        flex-direction: column;
+        background-image: url(/assets/images/bg.png);
+        min-height: 90vh;
+    }
+
+    &__card {
+        width: fit-content;
+        max-width: 50vw;
+        border: 1px solid lightgray;
+        border-radius: 1rem;
+        margin: auto;
+        background: #fff;
+
+        &-wrapper {
+            margin: 1rem;
+        }
+    }
+
+    &__title {
+    }
+
+    &__description {
+        font-size: 1rem;
+    }
+
+    &__stripe {
+        margin: 2rem auto;
+        width: fit-content;
+    }
+
+    &__paybutton {
+        background-color: #445551;
+        border: 1px solid transparent;
+        color: #fff;
+        width: 10rem;
+        text-align: center;
+        padding: .5rem;
+        border-radius: .5rem;
+        margin: 1rem 0 0;
+        text-decoration: none !important;
+        transition: .2s;
+
+        &:hover {
+            background-color: #fff;
+            color: #445551;
+            border: 1px solid #445551;
+        }
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .service {
+        &__title {
+            width: auto;
+        }
+    }
+}

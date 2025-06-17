@@ -2,6 +2,8 @@
 
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
+import { SERVICES } from "src/constants/services";
+import { createSlug } from "src/helpers";
 
 export default function Home() {
     const { isMobile } = useContext(AppContext)
@@ -79,7 +81,7 @@ export default function Home() {
             <div className="home__row" style={{ borderTop: '3px solid #caddd8', width: '60%', margin: '2rem auto 0' }}>
             </div>
             <div className="home__row">
-                <div className="home__col" style={{ width: isMobile ? '95%' : '80%' }}>
+                <div className="home__col" style={{ width: isMobile ? '95%' : '' }}>
                     <p className="home__text" style={{ margin: '2rem auto', fontSize: '2rem' }}><strong>SERVICIOS - PRECIOS - PROCEDIMIENTO DE CITA
                     </strong></p>
                     <p className="home__p" style={{ textAlign: 'center' }}>
@@ -91,39 +93,24 @@ export default function Home() {
                         <div className="home__price-group">
                             <p className="home__price-group-title">SESIONES PRIVADAS</p>
                             <div className="home__price-row">
-                                <div className="home__price-item">
-                                    <p className="home__price-title">PRIMERA CONSULTA DE 90 MINUTOS</p>
-                                    <p className="home__price-text">$90,000 COP <br/><br/> €30</p>
-                                </div>
-                                <div className="home__price-item">
-                                    <p className="home__price-title">CONSULTA INDIVIDUAL</p>
-                                    <p className="home__price-text">$130,000 COP x 1 hora <br/><br/> $200,000 COP x 2 horas</p>
-                                    <p className="home__price-text">€40 x 1 hora <br/><br/> €60 x 2 horas</p>
-                                </div>
-                                <div className="home__price-item">
-                                    <p className="home__price-title">PAQUETE DE 4 SESIONES (Semanales y consecutivas)</p>
-                                    <p className="home__price-text">$400,000 COP x 4 horas <br/><br/> $600,000 COP x 2 horas</p>
-                                    <p className="home__price-text">€120 x 4 horas <br/><br/> €200 x 2 horas</p>
-                                </div>
+                                {SERVICES.filter(s => s.type === 'privada').map(s =>
+                                    <a href={`/servicio/${createSlug(s.title)}`} className="home__price-item">
+                                        <p className="home__price-title">{s.title}</p>
+                                        <p className="home__price-text">{s.description}</p>
+                                    </a>
+                                )}
                             </div>
                         </div>
 
                         <div className="home__price-group">
                             <p className="home__price-group-title">SESIONES GRUPALES</p>
                             <div className="home__price-row">
-                                <div className="home__price-item">
-                                    <p className="home__price-title">GRUPO DE APOYO PSICOTERAPÉUTICO (4 sesiones, semanales y consecutivas. Jueves 18:00 horas de España)</p>
-                                    <p className="home__price-text">$200,000 COP <br/><br/> €40</p>
-                                </div>
-                                <div className="home__price-item">
-                                    <p className="home__price-title">GRUPO DE APOYO ESPIRITUAL (Sesiones semanales, sin continuidad fija)</p>
-                                    <p className="home__price-text">$ Aporte Voluntario</p>
-                                </div>
-                                <div className="home__price-item">
-                                    <p className="home__price-title">CHARLAS & ENCUENTROS FORMATIVOS (Online o presenciales. 4 horas)</p>
-                                    <p className="home__price-text">$1,000,000 COP <br/><br/> €200</p>
-                                    <p className="home__price-text">(Valor de Transporte y Alojamiento en caso de ser presencial no está incluido.)</p>
-                                </div>
+                                 {SERVICES.filter(s => s.type === 'grupal').map(s =>
+                                    <a href={`/servicio/${createSlug(s.title)}`} className="home__price-item">
+                                        <p className="home__price-title">{s.title}</p>
+                                        <p className="home__price-text">{s.description}</p>
+                                    </a>
+                                )}
                             </div>
                         </div>
                     </div>

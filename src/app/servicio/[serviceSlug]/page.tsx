@@ -13,14 +13,14 @@ interface ServicePageProps {
 
 export async function generateStaticParams() {
     return SERVICES.map(service => ({
-        serviceSlug: createSlug(service.title),
-        ...service
+        serviceSlug: createSlug(service.title)
     }))
 }
 
 export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
-    const { serviceSlug, service } = params
-    const { title, description, image } = service
+    const { serviceSlug } = params
+    const service = SERVICES.map(s => ({...s, slug: createSlug(s.title)})).find(s => s.slug === serviceSlug)
+    const { title, description, image } = service || {}
 
     if (serviceSlug) {
         return {
@@ -40,7 +40,8 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
 }
 
 export default async function EditionPage({ params }: ServicePageProps) {
-    const { service } = params
-
+    const { serviceSlug } = params
+    const service = SERVICES.map(s => ({...s, slug: createSlug(s.title)})).find(s => s.slug === serviceSlug)
+    
     return <Service service={service} />
 }

@@ -1,6 +1,7 @@
 export const SERVICES = [
     {
         title: 'PRIMERA CONSULTA DE 90 MINUTOS',
+        slug: 'primera-consulta-de-90-minutos',
         subtitle: '',
         description: `
         $90,000 COP 
@@ -10,10 +11,14 @@ export const SERVICES = [
         priceCOP: '90000',
         priceEUR: '30',
         paymentLink: '',
+        type: 'privada',
+        image: '',
+        buy_button_id: "buy_btn_1RayekHIxmqjxScpOD0KUCqL",
     },
 
     {
         title: 'CONSULTA INDIVIDUAL',
+        slug: 'consulta-individual',
         subtitle: '',
         description: `
         $130,000 COP x 1 hora
@@ -29,10 +34,14 @@ export const SERVICES = [
         priceEUR: '40',
         priceEUR2: '60',
         paymentLink: '',
+        type: 'privada',
+        image: '',
+        buy_button_id: "buy_btn_1Raz5NHIxmqjxScpk3QOzo4C",
     },
 
     {
         title: 'PAQUETE DE 4 SESIONES (Semanales y consecutivas)',
+        slug: 'paquete-de-4-sesiones',
         subtitle: '',
         description: `
         $400,000 COP x 4 horas
@@ -42,11 +51,15 @@ export const SERVICES = [
         priceCOP: '400000',
         priceEUR: '120',
         paymentLink: '',
+        type: 'privada',
+        image: '',
+        buy_button_id: "buy_btn_1Raz6IHIxmqjxScpgmbVo1Wh",
     },
 
 
     {
         title: 'GRUPO DE APOYO PSICOTERAPÉUTICO (4 sesiones, semanales y consecutivas. Jueves 18:00 horas de España)',
+        slug: 'grupo-de-apoyo-psicoterapeutico',
         subtitle: '',
         description: `
         $200,000 COP
@@ -56,10 +69,14 @@ export const SERVICES = [
         priceCOP: '200000',
         priceEUR: '40',
         paymentLink: '',
+        type: 'grupal',
+        image: '',
+        buy_button_id: "buy_btn_1Raz7CHIxmqjxScpYRMEcOpH",
     },
 
     {
         title: 'GRUPO DE APOYO ESPIRITUAL (Sesiones semanales, sin continuidad fija)',
+        slug: 'grupo-de-apoyo-espiritual',
         subtitle: '',
         description: `
         $ Aporte Voluntario`,
@@ -67,10 +84,14 @@ export const SERVICES = [
         priceCOP: '0',
         priceEUR: '0',
         paymentLink: '',
+        type: 'grupal',
+        image: '',
+        buy_button_id: "buy_btn_1RazAYHIxmqjxScpdVr9Ynou",
     },
 
     {
         title: 'CHARLAS & ENCUENTROS FORMATIVOS (Online o presenciales. 4 horas)',
+        slug: 'charlas-y-encuentros-formativos',
         subtitle: '',
         description: `
         $1,000,000 COP
@@ -81,5 +102,8 @@ export const SERVICES = [
         priceCOP: '1000000',
         priceEUR: '200',
         paymentLink: '',
+        type: 'grupal',
+        image: '',
+        buy_button_id: "buy_btn_1RazBKHIxmqjxScpmmuF6Fp3",
     },
 ]

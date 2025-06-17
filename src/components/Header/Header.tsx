@@ -10,6 +10,7 @@ export default function Header() {
 
     useEffect(() => {
         if (pathName.includes('media')) setPage('media')
+        if (pathName.includes('servicio')) setPage('servicio')
         else setPage('/')
         console.log(pathName)
     }, [pathName])

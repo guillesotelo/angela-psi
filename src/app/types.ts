@@ -20,11 +20,15 @@ export type userType = {
 }
 
 export type serviceType = {
-    title: string
-    subtitle: string
-    description: string
-    image: string
-    priceCOP: string
-    priceEUR: string
-    paymentLink: string
+    title?: string
+    slug?: string
+    subtitle?: string
+    description?: string
+    image?: string
+    priceCOP?: string
+    priceCOP2?: string
+    priceEUR?: string
+    priceEUR2?: string
+    paymentLink?: string
+    buy_button_id?: string
 }
