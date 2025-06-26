@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { userType } from '../app/types';
+import { dataObj, userType } from '../app/types';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
 
@@ -49,6 +49,19 @@ const logOut = async () => {
     } catch (err) { return false }
 }
 
+const createOrder = async (data: dataObj) => {
+    try {
+        const res = await axios.post(`${BASE_URL}/api/order/create`, data)
+        return res.data
+    } catch (err) { console.error(err) }
+}
+
+const getOrderById = async (id: string) => {
+    try {
+        const res = await axios.get(`${BASE_URL}/api/order/getById`, { params: { id }})
+        return res.data
+    } catch (err) { console.error(err) }
+}
 
 export {
     loginUser,
@@ -56,4 +69,6 @@ export {
     registerUser,
     updateUser,
     logOut,
+    createOrder,
+    getOrderById
 }

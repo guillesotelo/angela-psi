@@ -1,0 +1,108 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175);
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 1rem;
+}
+
+th {
+    background-color: #f7f7f7;
+}
+
+tr:nth-child(even) {
+    // background-color: #efefef;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+// React Big Calendar (events)
+.rbc-btn-group button {
+    border-color: transparent !important;
+    border-radius: .5rem !important;
+    margin: .2rem !important;
+    cursor: pointer !important;
+    transition: .3s !important;
+    font-size: 1rem !important;
+    background-color: #2fc4b263 !important;
+
+    &:hover {
+        filter: contrast(110%) !important;
+    }
+
+    &.rbc-active {
+        background-color: #2eb5a6 !important;
+        color: white !important;
+        box-shadow: none !important;
+    }
+}
+
+.rbc-toolbar-label {
+    font-size: 1rem !important;
+    border-radius: .5rem !important;
+    background-color: rgb(237, 237, 237);
+    padding: .35rem 0 !important;
+    margin: .2rem !important;
+    cursor: default;
+    font-weight: bold;
+}
+
+.rbc-month-view {
+    border-radius: .5rem !important;
+}
+
+.rbc-off-range-bg {
+    background-color: rgb(244, 244, 244) !important;
+}
+
+.rbc-event {
+    background-color: #0097ff36 !important;
+    color: black !important;
+    font-size: .8rem !important;
+    transition: .3s !important;
+
+    &:hover {
+        filter: brightness(110%) !important;
+    }
+}
+
+.rbc-event,
+.rbc-day-slot .rbc-background-event {
+    border: 1px solid #0099ff !important;
+}
+
+.rbc-day-bg {
+    transition: .3s !important;
+    cursor: pointer !important;
+
+    &:hover {
+        background-color: rgb(247, 247, 247) !important;
+    }
+}
+
+.rbc-today {
+    background-color: #00968829 !important;
+}
+
+.rbc-date-cell {
+    border-top: 3px solid transparent !important;
+}
+
+.rbc-current {
+    border-top: 3px solid #0037966a !important;
+}
+
+.rbc-header {
+    background: #ffd68a46 !important;
+}
+
+.rbc-day-bg-blocked {
+    background: gray !important;
+}

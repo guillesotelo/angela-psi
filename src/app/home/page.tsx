@@ -24,8 +24,8 @@ export default function Home() {
                         <p className="home__profile-info-item"><strong><span className="home__profile-info-span">Abordaje: </span></strong>Integrativo</p>
                         <p className="home__profile-info-item"><strong><span className="home__profile-info-span">Modalidad: </span></strong>Individual y Grupal</p>
                         <p className="home__profile-info-item"><strong><span className="home__profile-info-span">Población: </span></strong>Jóvenes, Adult@s, Pareja, Familia</p>
-                        <p className="home__profile-info-item"><strong><span className="home__profile-info-span">Encuentro: </span></strong>Online - Google Meets</p>
-                        <p className="home__profile-info-item"><strong><span className="home__profile-info-span">Atención: </span></strong>Sábado a Jueves en Horario de España</p>
+                        <p className="home__profile-info-item"><strong><span className="home__profile-info-span">Encuentro: </span></strong>Online - Google Meet</p>
+                        <p className="home__profile-info-item"><strong><span className="home__profile-info-span">Atención: </span></strong>Jueves a Martes (fin de semana inclusive)</p>
                         <p className="home__profile-info-item"><strong><span className="home__profile-info-span">Restricción: </span></strong>Servicio aún no homologado en España, aplica sólo en relación al Registro Profesional en Colombia</p>
                     </div>
                 </div>
@@ -93,7 +93,7 @@ export default function Home() {
                         <div className="home__price-group">
                             <p className="home__price-group-title">SESIONES PRIVADAS</p>
                             <div className="home__price-row">
-                                {SERVICES.filter(s => s.type === 'privada').map(s =>
+                                {SERVICES.filter(s => s.type === 'privada' && s.active).map(s =>
                                     <a href={`/servicio/${createSlug(s.title)}`} className="home__price-item">
                                         <p className="home__price-title">{s.title}</p>
                                         <p className="home__price-text">{s.description}</p>
@@ -105,7 +105,7 @@ export default function Home() {
                         <div className="home__price-group">
                             <p className="home__price-group-title">SESIONES GRUPALES</p>
                             <div className="home__price-row">
-                                 {SERVICES.filter(s => s.type === 'grupal').map(s =>
+                                {SERVICES.filter(s => s.type === 'grupal' && s.active).map(s =>
                                     <a href={`/servicio/${createSlug(s.title)}`} className="home__price-item">
                                         <p className="home__price-title">{s.title}</p>
                                         <p className="home__price-text">{s.description}</p>
@@ -118,8 +118,6 @@ export default function Home() {
             </div>
 
             <p className="home__p" style={{ textAlign: 'center', margin: '4rem 0 0', fontSize: '1.3rem' }}>
-                Si te decides por algún servicio, comunícate vía WhatsApp
-                <br />y con gusto acordaremos canal de pago, fecha y hora de nuestra cita.
                 <br /><br /><span style={{ fontSize: '1.6rem', fontWeight: 'bold', }}>WHATSAPP {isMobile ? <br /> : ''}+34 650 60 92 82</span>
             </p>
         </div>

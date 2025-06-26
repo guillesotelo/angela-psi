@@ -99,10 +99,10 @@
             flex-direction: column;
             border: 3px solid #85a099;
             border-radius: 1rem;
-            padding: 1rem;
+            padding: .5rem;
             text-align: center;
             height: 100%;
-            max-height: 15rem;
+            height: 14rem;
             overflow: hidden;
             transition: .2s;
             cursor: pointer;
@@ -116,10 +116,24 @@
                 transition: .2s;
                 transform: translateY(-3%);
             }
+
+            &:hover .home__price-text {
+                text-overflow: unset;
+                text-wrap: unset;
+                overflow: unset;
+            }
+        }
+
+        &-text {
+            // text-overflow: ellipsis;
+            // text-wrap: nowrap;
+            // overflow: hidden;
+            // width: 10rem;
         }
 
         &-title {
             font-weight: bold;
+            margin: .5rem 0;
         }
     }
 

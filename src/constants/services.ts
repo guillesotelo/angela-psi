@@ -4,8 +4,6 @@ export const SERVICES = [
         slug: 'primera-consulta-de-90-minutos',
         subtitle: '',
         description: `
-        $90,000 COP 
-        \n 
         €30`,
 
         priceCOP: '90000',
@@ -13,6 +11,7 @@ export const SERVICES = [
         paymentLink: '',
         type: 'privada',
         image: '',
+        active: true,
         buy_button_id: "buy_btn_1RayekHIxmqjxScpOD0KUCqL",
     },
 
@@ -21,10 +20,6 @@ export const SERVICES = [
         slug: 'consulta-individual',
         subtitle: '',
         description: `
-        $130,000 COP x 1 hora
-        \n
-        $200,000 COP x 2 horas
-        \n
         €40 x 1 hora
         \n
         €60 x 2 horas`,
@@ -36,6 +31,7 @@ export const SERVICES = [
         paymentLink: '',
         type: 'privada',
         image: '',
+        active: true,
         buy_button_id: "buy_btn_1Raz5NHIxmqjxScpk3QOzo4C",
     },
 
@@ -44,8 +40,6 @@ export const SERVICES = [
         slug: 'paquete-de-4-sesiones',
         subtitle: '',
         description: `
-        $400,000 COP x 4 horas
-        \n
         €120 x 4 horas`,
 
         priceCOP: '400000',
@@ -53,6 +47,7 @@ export const SERVICES = [
         paymentLink: '',
         type: 'privada',
         image: '',
+        active: true,
         buy_button_id: "buy_btn_1Raz6IHIxmqjxScpgmbVo1Wh",
     },
 
@@ -62,8 +57,6 @@ export const SERVICES = [
         slug: 'grupo-de-apoyo-psicoterapeutico',
         subtitle: '',
         description: `
-        $200,000 COP
-        \n
         €40`,
 
         priceCOP: '200000',
@@ -71,6 +64,7 @@ export const SERVICES = [
         paymentLink: '',
         type: 'grupal',
         image: '',
+        active: true,
         buy_button_id: "buy_btn_1Raz7CHIxmqjxScpYRMEcOpH",
     },
 
@@ -86,6 +80,7 @@ export const SERVICES = [
         paymentLink: '',
         type: 'grupal',
         image: '',
+        active: true,
         buy_button_id: "buy_btn_1RazAYHIxmqjxScpdVr9Ynou",
     },
 
@@ -94,16 +89,15 @@ export const SERVICES = [
         slug: 'charlas-y-encuentros-formativos',
         subtitle: '',
         description: `
-        $1,000,000 COP
-        \n
         €200
         \n
-        (Valor de Transporte y Alojamiento en caso de ser presencial no está incluido.)`,
+        (Valor de Transporte y Alojamiento en caso de ser presencial no está incluido)`,
         priceCOP: '1000000',
         priceEUR: '200',
         paymentLink: '',
         type: 'grupal',
         image: '',
+        active: true,
         buy_button_id: "buy_btn_1RazBKHIxmqjxScpmmuF6Fp3",
     },
 ]

@@ -4,7 +4,7 @@ export const getDate = (dateString: Date | number | string | undefined) => {
     if (dateString) {
         const date = new Date(dateString)
         if (date.getHours() === 24) date.setHours(0)
-        return date.toLocaleDateString('sv-SE', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })
+        return date.toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' })
     }
 }
 

@@ -15,12 +15,11 @@
         background: #fff;
 
         &-wrapper {
-            margin: 1rem;
+            margin: 2rem;
         }
     }
 
-    &__title {
-    }
+    &__title {}
 
     &__description {
         font-size: 1rem;
@@ -29,6 +28,20 @@
     &__stripe {
         margin: 2rem auto;
         width: fit-content;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: .75rem;
+
+        &-row {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
     }
 
     &__paybutton {
