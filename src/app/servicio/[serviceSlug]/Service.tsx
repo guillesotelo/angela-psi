@@ -121,14 +121,15 @@ export default function Service({ service }: Props) {
         try {
             setCheckoutLoading(true)
 
-            const res = await fetch('/api/create-checkout', {
+            const res = await fetch('/api/order/create-checkout', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ orderId, slug, quantity: 1 })
             })
 
             const d = await res.json()
-            window.location.href = d.url
+            console.log(d)
+            if (d.url) window.location.href = d.url
             setCheckoutLoading(false)
         } catch (error) {
             setCheckoutLoading(false)

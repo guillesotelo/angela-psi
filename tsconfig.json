@@ -38,7 +38,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "src/app/api/order/webhook-stripe", "src/app/api/order/create-checkout"  ],
   "exclude": [
     "node_modules"
   ]

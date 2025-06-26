@@ -56,9 +56,9 @@ const createOrder = async (data: dataObj) => {
     } catch (err) { console.error(err) }
 }
 
-const getOrderById = async (id: string) => {
+const getOrderById = async (_id: string) => {
     try {
-        const res = await axios.get(`${BASE_URL}/api/order/getById`, { params: { id }})
+        const res = await axios.get(`${BASE_URL}/api/order/getById`, { params: { _id }})
         return res.data
     } catch (err) { console.error(err) }
 }
