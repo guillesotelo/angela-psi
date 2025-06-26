@@ -64,6 +64,10 @@ export default function Confirmation() {
                             label='País de residencia'
                             value={order.country}
                             inline />
+                        <TextData
+                            label='Estado de pago'
+                            value='PAGADO'
+                            inline />
                     </div>
                     : ''}
 
