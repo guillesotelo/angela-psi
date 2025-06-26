@@ -14,7 +14,7 @@ const GoogleAnalytics = () => {
     if (!isProduction) return;
 
     // Trigger pageview tracking whenever the pathname changes
-    if(pathname) gtag.pageview(pathname);
+    gtag.pageview(pathname ?? '/');
   }, [pathname]);
 
   if (!isProduction) return null;
