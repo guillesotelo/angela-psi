@@ -17,7 +17,6 @@ export default function Confirmation() {
         if (!order && !loading && orderId) getorder(orderId)
     }, [pathname])
 
-
     const getorder = async (id: string) => {
         try {
             setLoading(true)
@@ -31,6 +30,7 @@ export default function Confirmation() {
             console.error(error)
         }
     }
+
     return (
         <div className="confirmation__container">
             <h1>✔️ Pago confirmado</h1>
@@ -58,7 +58,7 @@ export default function Confirmation() {
                             inline />
                         <TextData
                             label='Edad'
-                            value={order.email || order.phone}
+                            value={order.age}
                             inline />
                         <TextData
                             label='País de residencia'
