@@ -35,7 +35,6 @@ export default function Confirmation() {
         <div className="confirmation__container">
             <h1>✔️ Pago confirmado</h1>
             <h2>¡Muchas gracias!</h2>
-
             {loading ? <p className="confirmation__loading">Cargando datos...</p>
                 : order ?
                     <div className="confirmation__details">
