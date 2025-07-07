@@ -34,11 +34,11 @@ export default function Confirmation() {
     return (
         <div className="confirmation__container">
             <h1>✔️ Pago confirmado</h1>
-            <h2>¡Muchas gracias!</h2>
+            <h2>¡Muchas gracias{order?.name ? `, ${order.name}` : ''}!</h2>
             {loading ? <p className="confirmation__loading">Cargando datos...</p>
                 : order ?
                     <div className="confirmation__details">
-                        <h3>Estos son los datos de la reserva:</h3>
+                        <h3>Estos son los datos de tu reserva:</h3>
                         <TextData
                             label='Servicio'
                             value={order.title}
@@ -71,7 +71,7 @@ export default function Confirmation() {
                     : ''}
 
             <p className="confirmation__disclaimer">
-                Esta página es sólo informacional, ya puedes cerrarla.
+                Esta página es sólo informacional, ya puedes <a href="https://angelita-psi-nine.vercel.app">cerrarla</a>.
             </p>
         </div>
     )

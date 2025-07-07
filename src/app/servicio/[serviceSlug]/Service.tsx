@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import { dataObj, serviceType } from "src/app/types"
 import Button from "src/components/Button/Button";
 import InputField from "src/components/InputField/InputField";
-import { STRIPE_PIBLISHABLE_KEY } from "src/constants";
+import { COUNTRIES, STRIPE_PIBLISHABLE_KEY } from "src/constants";
 import Calendar from 'react-calendar'
 import { TileDisabledFunc } from 'react-calendar/dist/shared/types'
 import { createOrder } from "src/services";
 import toast from "react-hot-toast";
+import Dropdown from "src/components/Dropdown/Dropdown";
+import TextData from "src/components/TextData/TextData";
 
 type Props = {
     service?: serviceType
@@ -149,56 +151,73 @@ export default function Service({ service }: Props) {
                     {showForm ?
                         <>
                             <h3>Información personal:</h3>
-                            <div className="service__form">
-                                <div className="service__form-row">
-                                    <InputField
-                                        label="Nombre(s)"
-                                        name="name"
-                                        updateData={updateData} />
-                                    <InputField
-                                        label="Apellido"
-                                        name="lastName"
-                                        updateData={updateData} />
+                            {!showPayButton ?
+                                <div className="service__form">
+                                    <div className="service__form-row">
+                                        <InputField
+                                            label="Nombre(s)"
+                                            name="name"
+                                            updateData={updateData} />
+                                        <InputField
+                                            label="Apellido"
+                                            name="lastName"
+                                            updateData={updateData} />
+                                    </div>
+                                    <div className="service__form-row">
+                                        <InputField
+                                            label="Email"
+                                            name="email"
+                                            updateData={updateData} />
+                                        <InputField
+                                            label="Teléfono"
+                                            name="phone"
+                                            updateData={updateData} />
+                                    </div>
+                                    <div className="service__form-row">
+                                        <InputField
+                                            label="Edad"
+                                            name="age"
+                                            updateData={updateData}
+                                            type="number"
+                                            style={{ width: '5rem' }} />
+
+                                        <Dropdown
+                                            label="País de residencia"
+                                            options={COUNTRIES}
+                                            value={data.country}
+                                            selected={data.country}
+                                            setSelected={value => updateData('country', { target: { value } })}
+                                            style={{ width: '45rem' }}
+                                            maxHeight="25vh" />
+                                        {openCalendar ?
+                                            <Calendar
+                                                locale='es-ES'
+                                                onChange={selectDate}
+                                                value={date}
+                                                tileDisabled={tileDisabled}
+                                                className='react-calendar'
+                                            />
+                                            :
+                                            <Button
+                                                label={date ? new Date(date).toLocaleDateString('es-ES') : 'Seleccioná una fecha'}
+                                                handleClick={() => setOpenCalendar(true)}
+                                                bgColor="#3b978c"
+                                                textColor="#fff"
+                                                style={{ height: '2.5rem' }}
+                                            />}
+                                    </div>
                                 </div>
-                                <div className="service__form-row">
-                                    <InputField
-                                        label="Email"
-                                        name="email"
-                                        updateData={updateData} />
-                                    <InputField
-                                        label="Teléfono"
-                                        name="phone"
-                                        updateData={updateData} />
+                                :
+                                <div className="service__form">
+                                    <div className="service__form-row">
+                                        <TextData label="Nombre completo" value={data.name + ' ' + data.lastName} />
+                                        <TextData label="Contacto" value={data.email || data.phone} />
+                                        <TextData label="Edad" value={data.age} />
+                                        <TextData label="País de residencia" value={data.country} />
+                                    </div>
+                                    <TextData label="Fecha de cita" value={new Date(date || '').toLocaleDateString('es-ES')} />
                                 </div>
-                                <div className="service__form-row">
-                                    <InputField
-                                        label="Edad"
-                                        name="age"
-                                        updateData={updateData}
-                                        type="number"
-                                        style={{ width: '5rem' }} />
-                                    <InputField
-                                        label="País de residencia"
-                                        name="country"
-                                        updateData={updateData} />
-                                    {openCalendar ?
-                                        <Calendar
-                                            locale='es-ES'
-                                            onChange={selectDate}
-                                            value={date}
-                                            tileDisabled={tileDisabled}
-                                            className='react-calendar'
-                                        />
-                                        :
-                                        <Button
-                                            label={date ? new Date(date).toLocaleDateString('es-ES') : 'Seleccioná una fecha'}
-                                            handleClick={() => setOpenCalendar(true)}
-                                            bgColor="#3b978c"
-                                            textColor="#fff"
-                                            style={{ height: '2.5rem' }}
-                                        />}
-                                </div>
-                            </div>
+                            }
                         </>
                         :
                         <Button
@@ -207,7 +226,7 @@ export default function Service({ service }: Props) {
                             bgColor="#276276e6"
                             textColor="#fff"
                             style={{}} />}
-
+                    {showPayButton && !orderLoading ? <p>✅ Orden creada.</p> : ''}
                     {showPayButton ? //renderStripeButton()
                         <Button
                             label="Pagar"

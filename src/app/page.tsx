@@ -3,14 +3,14 @@ import { cache } from 'react'
 import Home from './home/page'
 
 export const metadata: Metadata = {
-    metadataBase: new URL(process.env.NODE_ENV === 'production' ? 'https://angela-psinews.com' : 'http://localhost:3000'),
-    title: 'angela-psi.',
+    metadataBase: new URL(process.env.NODE_ENV === 'production' ? 'https://angela-psi-nine.vercel.app' : 'http://localhost:3000'),
+    title: 'Angela PSI',
     description: '',
     openGraph: {
         title: '',
         description: '',
         images: ['/logo_515x515.png'],
-        url: 'https://www.angela-psinews.com',
+        url: 'https://www.angela-psi-nine.vercel.app',
         type: 'website',
     },
     twitter: {
