@@ -195,3 +195,42 @@ export const COUNTRIES = [
     "Zambia",
     "Zimbabue"
 ]
+
+export const bookingHeaders = [
+    {
+        name: 'CREADO',
+        value: 'createdAt',
+    },
+    {
+        name: 'SERVICIO',
+        value: 'title',
+    },
+    {
+        name: 'NOMBRE',
+        value: 'name',
+    },
+    {
+        name: 'APELLIDO',
+        value: 'lastName',
+    },
+    {
+        name: 'EDAD',
+        value: 'age',
+    },
+    {
+        name: 'TEL.',
+        value: 'phone',
+    },
+    {
+        name: 'EMAIL',
+        value: 'email',
+    },
+    {
+        name: 'FECHA DE CITA',
+        value: 'date',
+    },
+    {
+        name: 'PAGADO',
+        value: 'isPaid',
+    },
+]

@@ -33,7 +33,7 @@ export default function Login({ }: Props) {
                 ...logged,
                 login: new Date()
             }))
-            setTimeout(() => router.push('/editor'), 1500)
+            setTimeout(() => router.push('/admin'), 1500)
         } else toast.error('Error logging in, try again later')
         setLoading(false)
         return toast.remove(loading)

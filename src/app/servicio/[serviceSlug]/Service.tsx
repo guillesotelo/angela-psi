@@ -101,6 +101,7 @@ export default function Service({ service }: Props) {
     const checkData = () => {
         if (!data.name || !data.lastName || (!data.email && !data.phone) || !data.country) return true
         if (!data.email.includes('@')) return true
+        if (!date) return true
         return false
     }
 
@@ -231,7 +232,7 @@ export default function Service({ service }: Props) {
                         <Button
                             label="Pagar"
                             handleClick={handlePay}
-                            bgColor="#276276e6"
+                            bgColor="#3b978c"
                             textColor="#fff"
                             style={{ marginTop: '2rem' }} />
                         : showForm ?

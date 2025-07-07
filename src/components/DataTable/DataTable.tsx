@@ -176,8 +176,8 @@ export default function DataTable(props: Props) {
                                             header.value === 'message' ? row.userAlert && row[header.value] ? row[header.value] : row['message'] || '--' :
                                                 header.value === 'language' ? row[header.value] === 'es' ? '🇪🇸' : '🇺🇸' :
                                                     typeof row[header.value] === 'number' ? row[header.value] :
-                                                        row && row[header.value] ? String(row[header.value])
-                                                            : row[header.value] === false ? 'false'
+                                                        row && row[header.value] ? row[header.value] === true ? 'Si' : String(row[header.value])
+                                                            : row[header.value] === false ? 'No'
                                                                 : '--'}
                         </h4>
                     )}
@@ -185,9 +185,9 @@ export default function DataTable(props: Props) {
             )}
             {
                 maxItems < tableData?.length ?
-                    <button className={`datatable__lazy-btn${darkMode ? '--dark' : ''}`} onClick={() => setMaxItems(maxItems + 10)}>{`Show more ${name ? name : ''} ▼`}</button>
+                    <button className={`datatable__lazy-btn${darkMode ? '--dark' : ''}`} onClick={() => setMaxItems(maxItems + 10)}>{`Mostrar más ${name ? name : ''} ▼`}</button>
                     : tableData?.length && maxItems >= tableData?.length && tableData?.length > (max || 10) ?
-                        <button className={`datatable__lazy-btn${darkMode ? '--dark' : ''}`} onClick={() => setMaxItems(max || 10)}>Show less ▲</button>
+                        <button className={`datatable__lazy-btn${darkMode ? '--dark' : ''}`} onClick={() => setMaxItems(max || 10)}>Mostrar menos ▲</button>
                         : ''
             }
         </div >
@@ -242,9 +242,9 @@ export default function DataTable(props: Props) {
                             )}
                             {!dragging ?
                                 maxItems < tableData?.length ?
-                                    <button className={`datatable__lazy-btn${darkMode ? '--dark' : ''}`} onClick={() => setMaxItems(maxItems + 10)}>{`Show more ${name ? name : ''} ▼`}</button>
+                                    <button className={`datatable__lazy-btn${darkMode ? '--dark' : ''}`} onClick={() => setMaxItems(maxItems + 10)}>{`Mostrar más ${name ? name : ''} ▼`}</button>
                                     : tableData?.length && maxItems >= tableData?.length && tableData?.length > (max || 10) ?
-                                        <button className={`datatable__lazy-btn${darkMode ? '--dark' : ''}`} onClick={() => setMaxItems(max || 10)}>Show less ▲</button>
+                                        <button className={`datatable__lazy-btn${darkMode ? '--dark' : ''}`} onClick={() => setMaxItems(max || 10)}>Mostrar menos ▲</button>
                                         : '' : ''
                             }
                         </div>

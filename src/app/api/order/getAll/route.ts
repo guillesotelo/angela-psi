@@ -5,12 +5,11 @@ import axios from 'axios'
 import { retryWithDelay } from 'src/helpers'
 import { getToken } from '../../(helpers)'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL
-export async function POST(request: NextRequest) {
-    try {
-        const data = await request.json()
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
+export async function GET(request: NextRequest) {
+    try {        
         const token = await getToken(request)
-        const res = await retryWithDelay(() => axios.post(`${API_URL}/api/booking/create`, data, { params: { token } }), 5, 100)
+        const res = await retryWithDelay(() => axios.get(`${API_URL}/api/booking/getAll`, { params: { token } }), 5, 100)
         return NextResponse.json(res.data)
     } catch (err: any) {
         console.error("Next API Error: ", err)

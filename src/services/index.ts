@@ -49,16 +49,30 @@ const logOut = async () => {
     } catch (err) { return false }
 }
 
-const createOrder = async (data: dataObj) => {
+const getAllBookings = async (token?: string) => {
     try {
-        const res = await axios.post(`${BASE_URL}/api/order/create`, data)
+        const res = await axios.get(`${BASE_URL}/api/order/getAll`, { withCredentials: true, params: { token } })
+        return res.data
+    } catch (err) { console.error(err) }
+}
+
+const createOrder = async (data: dataObj, token?: string) => {
+    try {
+        const res = await axios.post(`${BASE_URL}/api/order/create`, data, { withCredentials: true, params: { token } })
         return res.data
     } catch (err) { console.error(err) }
 }
 
 const getOrderById = async (_id: string) => {
     try {
-        const res = await axios.get(`${BASE_URL}/api/order/getById`, { params: { _id }})
+        const res = await axios.get(`${BASE_URL}/api/order/getById`, { params: { _id } })
+        return res.data
+    } catch (err) { console.error(err) }
+}
+
+const deleteOrder = async (data: dataObj, token?: string) => {
+    try {
+        const res = await axios.post(`${BASE_URL}/api/order/remove`, data, { withCredentials: true, params: { token } })
         return res.data
     } catch (err) { console.error(err) }
 }
@@ -70,5 +84,7 @@ export {
     updateUser,
     logOut,
     createOrder,
-    getOrderById
+    deleteOrder,
+    getOrderById,
+    getAllBookings
 }
