@@ -128,7 +128,7 @@ export default function Service({ service }: Props) {
             const res = await fetch('/api/order/create-checkout', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ orderId, _id, quantity: 1 })
+                body: JSON.stringify({ orderId, _id, quantity: 1, voluntary: data.voluntary })
             })
 
             const d = await res.json()
@@ -208,6 +208,16 @@ export default function Service({ service }: Props) {
                                                 disabled={orderLoading}
                                             />}
                                     </div>
+                                    {Number(service?.priceEUR) < 1 &&
+                                        <div className="service__form-row">
+                                            <InputField
+                                                label="Aporte voluntario €"
+                                                name="voluntary"
+                                                updateData={updateData}
+                                                type="number"
+                                                value={parseInt(data.voluntary) || 5}
+                                                style={{ width: '5rem' }} />
+                                        </div>}
                                 </div>
                                 :
                                 <div className="service__form">
@@ -216,6 +226,8 @@ export default function Service({ service }: Props) {
                                         <TextData label="Contacto" value={data.email || data.phone} />
                                         <TextData label="Edad" value={data.age} />
                                         <TextData label="País de residencia" value={data.country} />
+                                        {Number(service?.priceEUR) < 1 &&
+                                            <TextData label="Aporte voluntario €" value={data.voluntary} />}
                                     </div>
                                     <TextData label="Fecha de cita" value={new Date(date || '').toLocaleDateString('es-ES')} />
                                 </div>

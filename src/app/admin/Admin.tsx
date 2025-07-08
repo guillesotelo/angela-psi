@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import DataTable from "src/components/DataTable/DataTable"
 import Modal from "src/components/Modal/Modal"
 import { bookingHeaders, COUNTRIES, serviceHeaders } from "src/constants"
@@ -18,7 +18,8 @@ import { Calendar as EventCalendar, momentLocalizer, Views } from 'react-big-cal
 import moment from 'moment';
 import 'moment/locale/es'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import TextData from "src/components/TextData/TextData"
+import { AppContext } from "../context/AppContext"
+import { useRouter } from "next/navigation"
 
 export default function Admin() {
     const [bookings, setBookings] = useState<dataObj[]>([])
@@ -33,8 +34,11 @@ export default function Admin() {
     const [calendarDate, setCalendarDate] = useState<any>(null)
     const imageUrlRef = useRef<HTMLInputElement | null>(null)
     const localizer = momentLocalizer(moment)
+    const { isLoggedIn } = useContext(AppContext)
+    const router = useRouter()
 
     useEffect(() => {
+        if (isLoggedIn === false) router.push('/')
         getBookings(true)
         getServices(true)
     }, [])

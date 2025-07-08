@@ -11,7 +11,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
 
 export async function POST(request: NextRequest) {
     try {
-        const { orderId, _id, quantity } = await request.json()
+        const { orderId, _id, quantity, voluntary } = await request.json()
 
         const service = await getServiceById(_id)
 
@@ -29,7 +29,8 @@ export async function POST(request: NextRequest) {
                                 description: service?.description || '',
                                 images: service?.image ? [service.image] : [],
                             },
-                            unit_amount: Math.round(Number(service?.priceEUR) * 100), // Cents
+                            unit_amount: Math.round(Number(service?.priceEUR) * 100)
+                                || Math.round(Number(voluntary || 5) * 100), // Cents
                         },
                         quantity: quantity || 1,
                     },
