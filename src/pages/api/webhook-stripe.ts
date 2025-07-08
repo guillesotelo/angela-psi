@@ -17,8 +17,11 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== 'POST') {
+        console.log('\n\nSTRIPE_WEBHOOK_SECRET', process.env.STRIPE_WEBHOOK_SECRET)
         return res.status(405).send('Method Not Allowed');
     }
+
+
 
     const sig = req.headers['stripe-signature'] as string;
 
