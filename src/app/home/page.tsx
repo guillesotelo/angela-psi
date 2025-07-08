@@ -97,24 +97,24 @@ export default function Home({ services }: Props) {
                         <div className="home__price-group">
                             <p className="home__price-group-title">SESIONES PRIVADAS</p>
                             <div className="home__price-row">
-                                {services.filter((s: serviceType) => s.type === 'privada' && s.active).map((s: serviceType) =>
+                                {services ? services.filter((s: serviceType) => s.type === 'privada' && s.active).map((s: serviceType) =>
                                     <a href={`/servicio/${createSlug(s.title || '')}`} className="home__price-item">
                                         <p className="home__price-title">{s.title}</p>
                                         <p className="home__price-text">{s.description}</p>
                                     </a>
-                                )}
+                                ) : ''}
                             </div>
                         </div>
 
                         <div className="home__price-group">
                             <p className="home__price-group-title">SESIONES GRUPALES</p>
                             <div className="home__price-row">
-                                {services.filter((s: serviceType) => s.type === 'grupal' && s.active).map((s: serviceType) =>
+                                {services ? services.filter((s: serviceType) => s.type === 'grupal' && s.active).map((s: serviceType) =>
                                     <a href={`/servicio/${createSlug(s.title || '')}`} className="home__price-item">
                                         <p className="home__price-title">{s.title}</p>
                                         <p className="home__price-text">{s.description}</p>
                                     </a>
-                                )}
+                                ) : ''}
                             </div>
                         </div>
                     </div>

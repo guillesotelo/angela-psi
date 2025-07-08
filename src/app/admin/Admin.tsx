@@ -18,6 +18,7 @@ import { Calendar as EventCalendar, momentLocalizer, Views } from 'react-big-cal
 import moment from 'moment';
 import 'moment/locale/es'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
+import TextData from "src/components/TextData/TextData"
 
 export default function Admin() {
     const [bookings, setBookings] = useState<dataObj[]>([])
@@ -431,7 +432,6 @@ export default function Admin() {
                                     type="number"
                                     value={booking.age || ''}
                                     style={{ width: '5rem' }} />
-
                                 <Dropdown
                                     label="País de residencia"
                                     options={COUNTRIES}
@@ -457,6 +457,13 @@ export default function Admin() {
                                         style={{ height: '2.5rem', margin: '0 1rem' }}
                                         disabled={loading}
                                     />}
+                                <Switch
+                                    label="Pagado"
+                                    on="Si"
+                                    off="No"
+                                    value={booking.isPaid}
+                                    setValue={value => updateBookingData('isPaid', { target: { value } })}
+                                />
                             </div>
                             <div className="service__form-row" style={{ marginTop: '2rem' }}>
                                 <Button
