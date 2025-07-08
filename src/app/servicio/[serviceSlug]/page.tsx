@@ -1,8 +1,7 @@
 import { Metadata } from 'next'
 import { serviceType } from 'src/app/types'
-import { SERVICES } from 'src/constants/services'
-import { createSlug } from 'src/helpers'
 import Service from './Service'
+import { getServiceBySlug } from 'src/services'
 
 interface ServicePageProps {
     params: {
@@ -11,15 +10,9 @@ interface ServicePageProps {
     }
 }
 
-export async function generateStaticParams() {
-    return SERVICES.map(service => ({
-        serviceSlug: createSlug(service.title)
-    }))
-}
-
 export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
     const { serviceSlug } = params
-    const service = SERVICES.map(s => ({...s, slug: createSlug(s.title)})).find(s => s.slug === serviceSlug)
+    const service = await getServiceBySlug(serviceSlug)
     const { title, description, image } = service || {}
 
     if (serviceSlug) {
@@ -29,7 +22,7 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
             openGraph: {
                 title,
                 description,
-                images: [{ url: image || '' }],
+                images: [{ url: '/logo_515x515.png' }],
             },
         }
     }
@@ -39,9 +32,9 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
     }
 }
 
-export default async function EditionPage({ params }: ServicePageProps) {
+export default async function ServicePage({ params }: ServicePageProps) {
     const { serviceSlug } = params
-    const service = SERVICES.map(s => ({...s, slug: createSlug(s.title)})).find(s => s.slug === serviceSlug)
-    
+    const service = await getServiceBySlug(serviceSlug)
+
     return <Service service={service} />
 }

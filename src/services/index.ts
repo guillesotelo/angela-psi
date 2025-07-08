@@ -3,7 +3,7 @@ import { dataObj, userType } from '../app/types';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
 
-// User
+// USER
 const loginUser = async (data: userType) => {
     try {
         const user = await axios.post(`${BASE_URL}/api/user/login`, data, { withCredentials: true })
@@ -49,6 +49,50 @@ const logOut = async () => {
     } catch (err) { return false }
 }
 
+// SERVICES
+const getAllServices = async () => {
+    try {
+        const res = await axios.get(`${BASE_URL}/api/service/getAll`)
+        return res.data
+    } catch (err) { console.error(err) }
+}
+
+const getServiceById = async (_id: string) => {
+    try {
+        const res = await axios.get(`${BASE_URL}/api/service/getById`, { params: { _id } })
+        return res.data
+    } catch (err) { console.error(err) }
+}
+
+const getServiceBySlug = async (slug: string) => {
+    try {
+        const res = await axios.get(`${BASE_URL}/api/service/getBySlug`, { params: { slug } })
+        return res.data
+    } catch (err) { console.error(err) }
+}
+
+const createService = async (data: dataObj, token?: string) => {
+    try {
+        const res = await axios.post(`${BASE_URL}/api/service/create`, data, { withCredentials: true, params: { token } })
+        return res.data
+    } catch (err) { console.error(err) }
+}
+
+const updateService = async (data: dataObj, token?: string) => {
+    try {
+        const res = await axios.post(`${BASE_URL}/api/service/update`, data, { withCredentials: true, params: { token } })
+        return res.data
+    } catch (err) { console.error(err) }
+}
+
+const deleteService = async (data: dataObj, token?: string) => {
+    try {
+        const res = await axios.post(`${BASE_URL}/api/service/remove`, data, { withCredentials: true, params: { token } })
+        return res.data
+    } catch (err) { console.error(err) }
+}
+
+// BOOKINGS
 const getAllBookings = async (token?: string) => {
     try {
         const res = await axios.get(`${BASE_URL}/api/order/getAll`, { withCredentials: true, params: { token } })
@@ -70,6 +114,13 @@ const getOrderById = async (_id: string) => {
     } catch (err) { console.error(err) }
 }
 
+const updateBooking = async (data: dataObj, token?: string) => {
+    try {
+        const res = await axios.post(`${BASE_URL}/api/order/update`, data, { withCredentials: true, params: { token } })
+        return res.data
+    } catch (err) { console.error(err) }
+}
+
 const deleteOrder = async (data: dataObj, token?: string) => {
     try {
         const res = await axios.post(`${BASE_URL}/api/order/remove`, data, { withCredentials: true, params: { token } })
@@ -83,8 +134,18 @@ export {
     registerUser,
     updateUser,
     logOut,
+
     createOrder,
     deleteOrder,
     getOrderById,
-    getAllBookings
+    updateBooking,
+    getAllBookings,
+
+    getAllServices,
+    getServiceById,
+    getServiceBySlug,
+    createService,
+    updateService,
+    deleteService,
+
 }

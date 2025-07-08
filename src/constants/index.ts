@@ -234,3 +234,34 @@ export const bookingHeaders = [
         value: 'isPaid',
     },
 ]
+
+export const serviceHeaders = [
+    {
+        name: 'CREADO',
+        value: 'createdAt',
+    },
+    {
+        name: 'TÍTULO',
+        value: 'title',
+    },
+    {
+        name: 'SUBTÍTULO',
+        value: 'subtitle',
+    },
+    {
+        name: 'DESCRIPCIÓN',
+        value: 'description',
+    },
+    {
+        name: 'PRECIO €',
+        value: 'priceEUR',
+    },
+    {
+        name: 'TIPO',
+        value: 'type',
+    },
+    {
+        name: 'ACTIVO',
+        value: 'active',
+    },
+]

@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
         const data = await request.json()
         const token = await getToken(request)
         const headers = { Authorization: `Bearer ${token}` }
-        const res = await retryWithDelay(() => axios.post(`${API_URL}/api/booking/remove`, data, { headers }), 5, 100)
+        const res = await retryWithDelay(() => axios.post(`${API_URL}/api/psiService/remove`, data, { headers }), 5, 100)
         return NextResponse.json(res.data)
     } catch (err: any) {
         console.error("Next API Error: ", err)

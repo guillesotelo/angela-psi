@@ -9,7 +9,8 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
 export async function GET(request: NextRequest) {
     try {        
         const token = await getToken(request)
-        const res = await retryWithDelay(() => axios.get(`${API_URL}/api/booking/getAll`, { params: { token } }), 5, 100)
+        const headers = { Authorization: `Bearer ${token}` }
+        const res = await retryWithDelay(() => axios.get(`${API_URL}/api/booking/getAll`, { headers }), 5, 100)
         return NextResponse.json(res.data)
     } catch (err: any) {
         console.error("Next API Error: ", err)

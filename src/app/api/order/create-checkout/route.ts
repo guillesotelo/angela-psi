@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { SERVICES } from 'src/constants/services'
 import { createSlug } from 'src/helpers'
+import { getServiceById } from 'src/services'
 import Stripe from 'stripe'
 
 export const dynamic = 'force-dynamic' // Force dynamic rendering for this route
@@ -11,10 +11,11 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
 
 export async function POST(request: NextRequest) {
     try {
-        const { orderId, slug, quantity } = await request.json()
+        const { orderId, _id, quantity } = await request.json()
 
-        const service = SERVICES.map(s => ({ ...s, slug: createSlug(s.title) })).find(s => s.slug === slug)
-        if (!service) return NextResponse.json('Service or slug not found')
+        const service = await getServiceById(_id)
+
+        if (!service || !service._id) return NextResponse.json('Service not found')
 
         try {
             const session = await stripe.checkout.sessions.create({

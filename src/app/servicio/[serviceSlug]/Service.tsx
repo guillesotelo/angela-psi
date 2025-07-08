@@ -43,7 +43,8 @@ export default function Service({ service }: Props) {
         priceEUR,
         paymentLink,
         buy_button_id,
-        slug
+        slug,
+        _id
     } = service || {}
 
     useEffect(() => {
@@ -127,11 +128,10 @@ export default function Service({ service }: Props) {
             const res = await fetch('/api/order/create-checkout', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ orderId, slug, quantity: 1 })
+                body: JSON.stringify({ orderId, _id, quantity: 1 })
             })
 
             const d = await res.json()
-            console.log(d)
             if (d.url) window.location.href = d.url
             setCheckoutLoading(false)
         } catch (error) {
@@ -146,8 +146,8 @@ export default function Service({ service }: Props) {
                 <div className="service__card-wrapper">
                     <h1 className="service__title">{title}</h1>
                     <h2 className="service__subtitle">{subtitle}</h2>
-                    <p className="service__description">{description}</p>
-                    {/* <p className="service__price">{getPrice()}</p> */}
+                    <div className="service__description" dangerouslySetInnerHTML={{ __html: description?.replace(/\n/g, "<br />") || '' }} />
+                    <p className="service__price">Precio unitario: <strong>{getPrice()}</strong></p>
 
                     {showForm ?
                         <>
@@ -205,6 +205,7 @@ export default function Service({ service }: Props) {
                                                 bgColor="#3b978c"
                                                 textColor="#fff"
                                                 style={{ height: '2.5rem' }}
+                                                disabled={orderLoading}
                                             />}
                                     </div>
                                 </div>

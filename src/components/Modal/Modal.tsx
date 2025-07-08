@@ -13,21 +13,6 @@ export default function Modal({ children, onClose, title, subtitle, style }: Pro
     const [closeAnimation, setCloseAnimation] = useState('')
     const { darkMode } = useContext(AppContext)
 
-    useEffect(() => {
-        const closeOnOuterClick = (e: any) => {
-            if (e.target.className === 'modal__wrapper') closeModal()
-        }
-        const closeOnEsc = (e: KeyboardEvent) => {
-            if (e.key === 'Escape') closeModal()
-        }
-        document.addEventListener('click', closeOnOuterClick)
-        document.addEventListener('keydown', closeOnEsc)
-        return () => {
-            document.removeEventListener('click', closeOnOuterClick)
-            document.removeEventListener('keydown', closeOnEsc)
-        }
-    }, [])
-
     const closeModal = () => {
         setCloseAnimation('close-animation')
         setTimeout(() => onClose ? onClose() : null, 200)

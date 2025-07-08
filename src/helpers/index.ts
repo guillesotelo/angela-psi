@@ -137,3 +137,20 @@ export const createSlug = (word: string) => {
         .replace(/\s+/g, '-')
         .replace(/-+/g, '-')
 }
+
+export const convertToBase64 = (file: any) => {
+    try {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader()
+            fileReader.readAsDataURL(file)
+            fileReader.onload = () => {
+                resolve(fileReader.result)
+            }
+            fileReader.onerror = (error) => {
+                reject(error)
+            }
+        })
+    } catch (err) {
+        console.error(err)
+    }
+}

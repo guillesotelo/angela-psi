@@ -20,10 +20,13 @@ export type userType = {
 }
 
 export type serviceType = {
+    _id?: string
     title?: string
     slug?: string
     subtitle?: string
     description?: string
+    type?: string
+    active?: boolean
     image?: string
     priceCOP?: string
     priceCOP2?: string

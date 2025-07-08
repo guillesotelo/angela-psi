@@ -2,10 +2,14 @@
 
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
-import { SERVICES } from "src/constants/services";
 import { createSlug } from "src/helpers";
+import { dataObj, serviceType } from "../types";
 
-export default function Home() {
+type Props = {
+    services: dataObj
+}
+
+export default function Home({ services }: Props) {
     const { isMobile } = useContext(AppContext)
 
     return <div className="home__container">
@@ -93,8 +97,8 @@ export default function Home() {
                         <div className="home__price-group">
                             <p className="home__price-group-title">SESIONES PRIVADAS</p>
                             <div className="home__price-row">
-                                {SERVICES.filter(s => s.type === 'privada' && s.active).map(s =>
-                                    <a href={`/servicio/${createSlug(s.title)}`} className="home__price-item">
+                                {services.filter((s: serviceType) => s.type === 'privada' && s.active).map((s: serviceType) =>
+                                    <a href={`/servicio/${createSlug(s.title || '')}`} className="home__price-item">
                                         <p className="home__price-title">{s.title}</p>
                                         <p className="home__price-text">{s.description}</p>
                                     </a>
@@ -105,8 +109,8 @@ export default function Home() {
                         <div className="home__price-group">
                             <p className="home__price-group-title">SESIONES GRUPALES</p>
                             <div className="home__price-row">
-                                {SERVICES.filter(s => s.type === 'grupal' && s.active).map(s =>
-                                    <a href={`/servicio/${createSlug(s.title)}`} className="home__price-item">
+                                {services.filter((s: serviceType) => s.type === 'grupal' && s.active).map((s: serviceType) =>
+                                    <a href={`/servicio/${createSlug(s.title || '')}`} className="home__price-item">
                                         <p className="home__price-title">{s.title}</p>
                                         <p className="home__price-text">{s.description}</p>
                                     </a>

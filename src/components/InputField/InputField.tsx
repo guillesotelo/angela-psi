@@ -1,6 +1,10 @@
-import React, { useContext, useEffect } from 'react'
-import { onChangeEventType } from '../../app/types'
+"use client"
+
+import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../../app/context/AppContext'
+import { onChangeEventType } from '../../app/types'
+import toast from 'react-hot-toast'
+import imageCompression from 'browser-image-compression';
 
 type Props = {
     name: string
@@ -9,18 +13,21 @@ type Props = {
     type?: string
     label?: string
     placeholder?: string
-    value?: string | number | readonly string[] | undefined
+    value?: string | number | null
     cols?: number
     rows?: number
     style?: React.CSSProperties
     disabled?: boolean
     onSubmit?: () => void
-    resize?: 'vertical' | 'horizontal' | 'both'
+    images?: string[]
+    setImages?: (value: string[]) => void
+    multiple?: boolean
+    setLoadingImages?: (value: boolean) => void
 }
 
 export default function InputField(props: Props) {
-    let isEnterKeyListenerAdded = false
     const { darkMode } = useContext(AppContext)
+    let isEnterKeyListenerAdded = false
 
     const {
         value,
@@ -35,7 +42,10 @@ export default function InputField(props: Props) {
         style,
         disabled,
         onSubmit,
-        resize
+        images,
+        setImages,
+        multiple,
+        setLoadingImages
     } = props
 
     useEffect(() => {
@@ -54,31 +64,76 @@ export default function InputField(props: Props) {
         }
     }, [onSubmit])
 
+    const convertToBase64 = (file: any) => {
+        try {
+            return new Promise((resolve, reject) => {
+                const fileReader = new FileReader()
+                fileReader.readAsDataURL(file)
+                fileReader.onload = () => {
+                    resolve(fileReader.result)
+                }
+                fileReader.onerror = (error) => {
+                    reject(error)
+                }
+            })
+        } catch (err) {
+            console.error(err)
+            toast.error('Error loading file. Please try again')
+        }
+    }
+
+    const uploadFile = async (e: any) => {
+        try {
+            if (setLoadingImages) setLoadingImages(true)
+            const files = e.target.files
+            if (files && files.length) {
+                let imgArray = []
+                for (let i = 0; i < files.length; i++) {
+                    const compressOptions = {
+                        maxSizeMB: 0.3,
+                        maxWidthOrHeight: 600,
+                        useWebWorker: true
+                    }
+
+                    const compressedFile = await imageCompression(files[i], compressOptions)
+                    const base64 = await convertToBase64(compressedFile)
+                    imgArray.push(String(base64))
+                }
+                if (setImages) setImages(imgArray)
+            }
+            if (setLoadingImages) setLoadingImages(false)
+        } catch (err) {
+            if (setLoadingImages) setLoadingImages(false)
+            console.error(err)
+        }
+    }
+
+
     return type === 'textarea' ?
         <div className='inputfield__container' style={style}>
-            {label ? <h2 className={`inputfield__label${darkMode ? '--dark' : ''}`} style={{ color: darkMode ? 'lightgray' : '' }}>{label}</h2> : ''}
+            {label ? <h2 className={`inputfield__label${darkMode ? '--dark' : ''}`}>{label}</h2> : ''}
             <textarea
                 className={className || `textarea__default${darkMode ? '--dark' : ''}`}
                 placeholder={placeholder || ''}
                 onChange={e => updateData ? updateData(name, e) : null}
-                value={value}
+                value={value || undefined}
                 cols={cols}
                 rows={rows}
                 disabled={disabled}
-                style={{ resize: resize || 'none', color: darkMode ? 'lightgray' : '' }}
             />
         </div>
         :
         <div className='inputfield__container' style={style}>
-            {label ? <h2 className={`inputfield__label${darkMode ? '--dark' : ''}`} style={{ color: darkMode ? 'lightgray' : '' }}>{label}</h2> : ''}
+            {label ? <h2 className={`inputfield__label${darkMode ? '--dark' : ''}`}>{label}</h2> : ''}
             <input
                 type={type || 'text'}
                 className={className || `inputfield__default${darkMode ? '--dark' : ''}`}
                 placeholder={placeholder || ''}
-                onChange={e => updateData ? updateData(name, e) : null}
-                value={value}
+                accept={type === 'file' ? '.png, .jpg, .jpeg, .webp' : ''}
+                onChange={e => type === 'file' ? uploadFile(e) : updateData ? updateData(name, e) : null}
+                value={value || undefined}
                 disabled={disabled}
-                style={{ color: darkMode ? 'lightgray' : '' }}
+                multiple={multiple}
             />
         </div>
 }
