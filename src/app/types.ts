@@ -34,4 +34,6 @@ export type serviceType = {
     priceEUR2?: string
     paymentLink?: string
     buy_button_id?: string
+    discounts?: string
+    discountsApply?: string
 }

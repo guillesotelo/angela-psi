@@ -154,3 +154,24 @@ export const convertToBase64 = (file: any) => {
         console.error(err)
     }
 }
+
+export const getPrice = (price: string | number | undefined) => {
+    if (!Number(price)) return ''
+    return `€ ${parseFloat(String(price)).toFixed(2)}`
+}
+
+export const getCountryCode = async () => {
+    try {
+        const response = await fetch('https://ipapi.co/json/')
+        if (!response.ok) throw new Error('Failed to fetch IP data')
+
+        const data = await response.json()
+
+        const countryCode = data.country_code.toLowerCase()
+
+        return countryCode
+    } catch (error) {
+        console.error('Error fetching IP data:', error)
+        return ''
+    }
+}

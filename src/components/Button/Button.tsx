@@ -28,7 +28,7 @@ export default function Button({ label, handleClick, className, bgColor, textCol
     }, [darkMode])
 
     return loading ?
-        <div className='button__default' style={{ textAlign: 'center', padding: '.6rem 0' }}><SyncLoader size={10} color='#fff' /></div>
+        <div className='button__loading'><SyncLoader size={10} color='#fff' /></div>
         : svg ?
             <div
                 className="button__icon"

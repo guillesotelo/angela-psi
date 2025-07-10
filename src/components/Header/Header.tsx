@@ -9,16 +9,14 @@ export default function Header() {
     const pathName = usePathname()
 
     useEffect(() => {
-        if ((pathName || '').includes('media')) setPage('media')
-        if ((pathName || '').includes('servicio')) setPage('servicio')
-        else setPage('/')
+        setPage(pathName || '/')
     }, [pathName])
 
     return (
         <div className="header__container">
             <p className="header__link" style={{ color: page === '/' ? '#1f9b7e' : '' }} onClick={() => router.push('/')}>Home</p>
             <p>&nbsp;&nbsp;|&nbsp;&nbsp;</p>
-            <p className="header__link" style={{ color: page === 'media' ? '#1f9b7e' : '' }} onClick={() => router.push('/media')}>Podcasts</p>
+            <p className="header__link" style={{ color: page === '/media' ? '#1f9b7e' : '' }} onClick={() => router.push('/media')}>Podcasts</p>
         </div>
     )
 }

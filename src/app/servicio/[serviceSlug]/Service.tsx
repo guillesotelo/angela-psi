@@ -11,6 +11,7 @@ import { createOrder } from "src/services";
 import toast from "react-hot-toast";
 import Dropdown from "src/components/Dropdown/Dropdown";
 import TextData from "src/components/TextData/TextData";
+import { getPrice } from "src/helpers";
 
 type Props = {
     service?: serviceType
@@ -39,12 +40,12 @@ export default function Service({ service }: Props) {
         subtitle,
         description,
         image,
-        priceCOP,
         priceEUR,
         paymentLink,
         buy_button_id,
-        slug,
-        _id
+        _id,
+        discounts,
+        discountsApply
     } = service || {}
 
     useEffect(() => {
@@ -76,17 +77,6 @@ export default function Service({ service }: Props) {
         setOpenCalendar(false)
     }
 
-    const getPrice = () => {
-        let price = ''
-        // if (priceCOP) {
-        //     price += `$${parseFloat(priceCOP).toFixed(2)} COP`
-        // }
-        if (priceEUR) {
-            price += `€${parseFloat(priceEUR).toFixed(2)}`
-        }
-        return price
-    }
-
     const renderStripeButton = () => {
         return (
             <div className="service__stripe">
@@ -102,6 +92,7 @@ export default function Service({ service }: Props) {
     const checkData = () => {
         if (!data.name || !data.lastName || (!data.email && !data.phone) || !data.country) return true
         if (!data.email.includes('@')) return true
+        if (data.age && Number(data.age) < 3) return true
         if (!date) return true
         return false
     }
@@ -128,16 +119,41 @@ export default function Service({ service }: Props) {
             const res = await fetch('/api/order/create-checkout', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ orderId, _id, quantity: 1, voluntary: data.voluntary })
+                body: JSON.stringify({
+                    orderId,
+                    _id,
+                    quantity: data.quantity || 1,
+                    voluntary: data.voluntary,
+                    country: data.country
+                })
             })
 
             const d = await res.json()
             if (d.url) window.location.href = d.url
+            else toast.error(d.error || 'Ocurrió un error. Intena nuevamente')
             setCheckoutLoading(false)
         } catch (error) {
+            toast.error('Ocurrió un error. Intena nuevamente')
             setCheckoutLoading(false)
             console.error(error)
         }
+    }
+
+    const getPriceWithDiscounts = () => {
+        let discountApplies = false
+
+        if (data.country && discountsApply) {
+            discountApplies = discountsApply.toLowerCase().includes(data.country.toLowerCase())
+                || discountsApply.toLowerCase().includes('todos')
+        }
+        let price = discounts && discountApplies ?
+            Number(priceEUR) * (100 - Number(discounts.replace('%', ''))) / 100 : Number(priceEUR)
+
+        if (title?.toLowerCase().includes('consulta individual') && data.quantity > 1) {
+            price = Number(priceEUR) * data.quantity * .75
+        }
+
+        return getPrice(price) || '-'
     }
 
     return (
@@ -147,7 +163,10 @@ export default function Service({ service }: Props) {
                     <h1 className="service__title">{title}</h1>
                     <h2 className="service__subtitle">{subtitle}</h2>
                     <div className="service__description" dangerouslySetInnerHTML={{ __html: description?.replace(/\n/g, "<br />") || '' }} />
-                    <p className="service__price">Precio unitario: <strong>{getPrice()}</strong></p>
+                    <div className="service__price">
+                        <p className="service__price-unit">Precio unitario: <strong>{getPrice(priceEUR) || '-'}</strong></p>
+                        {showForm ? <p className="service__price-total"> <strong>{getPriceWithDiscounts()}</strong></p> : ''}
+                    </div>
 
                     {showForm ?
                         <>
@@ -184,12 +203,21 @@ export default function Service({ service }: Props) {
 
                                         <Dropdown
                                             label="País de residencia"
-                                            options={COUNTRIES}
+                                            options={COUNTRIES.map(c => c.name)}
                                             value={data.country}
                                             selected={data.country}
                                             setSelected={value => updateData('country', { target: { value } })}
                                             style={{ width: '45rem' }}
                                             maxHeight="25vh" />
+                                        {title?.toLowerCase().includes('consulta individual') ?
+                                            <Dropdown
+                                                label="Cantidad (horas)"
+                                                options={Array.from({ length: 2 }).map((_, i) => i + 1)}
+                                                value={data.quantity || 1}
+                                                selected={data.quantity || 1}
+                                                setSelected={value => updateData('quantity', { target: { value } })}
+                                                style={{ width: '20rem' }}
+                                                maxHeight="25vh" /> : ''}
                                         {openCalendar ?
                                             <Calendar
                                                 locale='es-ES'
@@ -202,22 +230,22 @@ export default function Service({ service }: Props) {
                                             <Button
                                                 label={date ? new Date(date).toLocaleDateString('es-ES') : 'Seleccioná una fecha'}
                                                 handleClick={() => setOpenCalendar(true)}
-                                                bgColor="#3b978c"
+                                                bgColor="#3c758a"
                                                 textColor="#fff"
-                                                style={{ height: '2.5rem' }}
+                                                // style={{ height: '2.5rem' }}
                                                 disabled={orderLoading}
                                             />}
+                                        {!Number(service?.priceEUR) ?
+                                            <div className="service__form-row">
+                                                <InputField
+                                                    label="Aporte voluntario €"
+                                                    name="voluntary"
+                                                    updateData={updateData}
+                                                    type="number"
+                                                    value={parseInt(data.voluntary) || 5}
+                                                    style={{ width: '5rem' }} />
+                                            </div> : ''}
                                     </div>
-                                    {Number(service?.priceEUR) < 1 &&
-                                        <div className="service__form-row">
-                                            <InputField
-                                                label="Aporte voluntario €"
-                                                name="voluntary"
-                                                updateData={updateData}
-                                                type="number"
-                                                value={parseInt(data.voluntary) || 5}
-                                                style={{ width: '5rem' }} />
-                                        </div>}
                                 </div>
                                 :
                                 <div className="service__form">
@@ -245,8 +273,9 @@ export default function Service({ service }: Props) {
                         <Button
                             label="Pagar"
                             handleClick={handlePay}
-                            bgColor="#3b978c"
+                            bgColor="#3c758a"
                             textColor="#fff"
+                            loading={checkoutLoading}
                             style={{ marginTop: '2rem' }} />
                         : showForm ?
                             <Button

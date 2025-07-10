@@ -20,6 +20,7 @@ import 'moment/locale/es'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import { AppContext } from "../context/AppContext"
 import { useRouter } from "next/navigation"
+import TextData from "src/components/TextData/TextData"
 
 export default function Admin() {
     const [bookings, setBookings] = useState<dataObj[]>([])
@@ -70,7 +71,6 @@ export default function Admin() {
             setLoading(load)
             const _services = await getAllServices()
             if (_services && _services.length) setServices(_services)
-            console.log(_services)
             setLoading(false)
         } catch (error) {
             setLoading(false)
@@ -257,6 +257,14 @@ export default function Admin() {
         return !isPastDay
     }
 
+    const getDiscountPrice = () => {
+        if (service) {
+            if (service.discounts) {
+                return '€ ' + Number(service.priceEUR) * (100 - Number(service.discounts.replace('%', ''))) / 100
+            }
+            return service.priceEUR || ''
+        }
+    }
 
     return (
         <div className="admin__container">
@@ -324,9 +332,10 @@ export default function Admin() {
                 <Modal
                     title={`${service.title}`}
                     subtitle={service.subtitle || ''}
-                    onClose={cancel}>
+                    onClose={cancel}
+                    style={{ minHeight: '70vh' }}>
                     <div className="admin__modal-content">
-                        <div className="service__form">
+                        <div className="service__form" style={{ height: '60vh', justifyContent: 'space-between' }}>
                             <div className="service__form-row">
                                 <InputField
                                     label="Título"
@@ -353,13 +362,6 @@ export default function Admin() {
                                     type="textarea"
                                     rows={6} />
                             </div>
-                            <p style={{ margin: '0', fontSize: '.8rem', color: '#696869' }}>Imagen</p>
-                            <div className="service__form-row">
-                                <div style={{ display: 'flex' }}>
-                                    {service.image ? <img src={service.image} alt="Image" style={{ height: '4rem', marginRight: '1rem' }} /> : ''}
-                                    <input ref={imageUrlRef} type='file' accept='image/*' onChange={uploadImage} />
-                                </div>
-                            </div>
                             <div className="service__form-row">
                                 <InputField
                                     label="Precio en €"
@@ -367,12 +369,34 @@ export default function Admin() {
                                     updateData={updateServiceData}
                                     value={service.priceEUR || ''}
                                     style={{ width: '8rem' }} />
+                                <Dropdown
+                                    label="Descuento"
+                                    options={['0%'].concat(Array.from({ length: 10 }).map((_, i) => `${i ? i * 10 : 5}%`))}
+                                    value={service.discounts}
+                                    selected={service.discounts}
+                                    setSelected={value => updateServiceData('discounts', { target: { value } })}
+                                    maxHeight="15vh" />
+                                <Dropdown
+                                    label="Descuento aplica para"
+                                    options={['Todos', 'Colombia', 'España']}
+                                    value={service.discountsApply || 'Todos'}
+                                    selected={service.discountsApply || 'Todos'}
+                                    setSelected={value => updateServiceData('discountsApply', { target: { value } })}
+                                    maxHeight="15vh" />
                                 <Switch
                                     label="Activo"
                                     on="Si"
                                     off="No"
                                     value={service.active}
                                     setValue={value => updateServiceData('active', { target: { value } })} />
+                            </div>
+                            <TextData label="Precio con descuento" value={getDiscountPrice()} />
+                            <p style={{ margin: '0', fontSize: '.8rem', color: '#696869' }}>Imagen</p>
+                            <div className="service__form-row">
+                                <div style={{ display: 'flex' }}>
+                                    {service.image ? <img src={service.image} alt="Image" style={{ height: '4rem', marginRight: '1rem' }} /> : ''}
+                                    <input ref={imageUrlRef} type='file' accept='image/*' onChange={uploadImage} />
+                                </div>
                             </div>
                             <div className="service__form-row" style={{ marginTop: '2rem' }}>
                                 <Button
@@ -438,7 +462,7 @@ export default function Admin() {
                                     style={{ width: '5rem' }} />
                                 <Dropdown
                                     label="País de residencia"
-                                    options={COUNTRIES}
+                                    options={COUNTRIES.map(c => c.name)}
                                     value={booking.country}
                                     selected={booking.country}
                                     setSelected={value => updateBookingData('country', { target: { value } })}
@@ -456,7 +480,7 @@ export default function Admin() {
                                     <Button
                                         label={booking.date ? new Date(booking.date).toLocaleDateString('es-ES') : 'Seleccioná una fecha'}
                                         handleClick={() => setOpenCalendar(true)}
-                                        bgColor="#3b978c"
+                                        bgColor="#3c758a"
                                         textColor="#fff"
                                         style={{ height: '2.5rem', margin: '0 1rem' }}
                                         disabled={loading}

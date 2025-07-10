@@ -2,7 +2,7 @@
 
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
-import { createSlug } from "src/helpers";
+import { createSlug, getPrice } from "src/helpers";
 import { dataObj, serviceType } from "../types";
 
 type Props = {
@@ -12,12 +12,26 @@ type Props = {
 export default function Home({ services }: Props) {
     const { isMobile } = useContext(AppContext)
 
+    const ServiceCard = ({ service, width }: dataObj) => {
+        return (
+            <a href={`/servicio/${createSlug(service.title || '')}`} className="home__service-item" style={{ width: isMobile ? '' : width }}>
+                <div className="home__service-item-wrapper">
+                    <p className="home__service-item-title">{service.title}</p>
+                </div>
+                <p className="home__service-item-price">{`${getPrice(service.priceEUR)}`}</p>
+                <p className="home__service-item-text">{service.description}</p>
+            </a>
+        )
+    }
+
     return <div className="home__container">
         <div className="home__wrapper">
             <div className="home__row" style={{ gap: '3rem' }}>
                 {!isMobile ?
                     <div className="home__col">
-                        <img className="home__profile-image" src='/assets/images/profile.png' draggable={false} />
+                        <div className="home__profile">
+                            <img className="home__profile-image" src='/assets/images/profile.png' draggable={false} />
+                        </div>
                     </div> : ''}
                 <div className="home__col">
                     <div className="home__profile-info">
@@ -35,7 +49,9 @@ export default function Home({ services }: Props) {
                 </div>
                 {isMobile ?
                     <div className="home__col">
-                        <img className="home__profile-image" src='/assets/images/profile.png' draggable={false} />
+                        <div className="home__profile">
+                            <img className="home__profile-image" src='/assets/images/profile.png' draggable={false} />
+                        </div>
                     </div> : ''}
             </div>
             <div className="home__row">
@@ -94,26 +110,20 @@ export default function Home({ services }: Props) {
                     </p>
 
                     <div className="home__row" style={{ gap: '2rem' }}>
-                        <div className="home__price-group">
-                            <p className="home__price-group-title">SESIONES PRIVADAS</p>
-                            <div className="home__price-row">
-                                {services ? services.filter((s: serviceType) => s.type === 'privada' && s.active).map((s: serviceType) =>
-                                    <a href={`/servicio/${createSlug(s.title || '')}`} className="home__price-item">
-                                        <p className="home__price-title">{s.title}</p>
-                                        <p className="home__price-text">{s.description}</p>
-                                    </a>
+                        <div className="home__service-group">
+                            <p className="home__service-group-title">SESIONES PRIVADAS</p>
+                            <div className="home__service-row">
+                                {services ? services.filter((s: serviceType) => s.type === 'privada' && s.active).map((s: serviceType, i: number, arr: dataObj[]) =>
+                                    <ServiceCard key={i} service={s} width={`${95 / arr.length}%`} />
                                 ) : ''}
                             </div>
                         </div>
 
-                        <div className="home__price-group">
-                            <p className="home__price-group-title">SESIONES GRUPALES</p>
-                            <div className="home__price-row">
-                                {services ? services.filter((s: serviceType) => s.type === 'grupal' && s.active).map((s: serviceType) =>
-                                    <a href={`/servicio/${createSlug(s.title || '')}`} className="home__price-item">
-                                        <p className="home__price-title">{s.title}</p>
-                                        <p className="home__price-text">{s.description}</p>
-                                    </a>
+                        <div className="home__service-group">
+                            <p className="home__service-group-title">SESIONES GRUPALES</p>
+                            <div className="home__service-row">
+                                {services ? services.filter((s: serviceType) => s.type === 'grupal' && s.active).map((s: serviceType, i: number, arr: dataObj[]) =>
+                                    <ServiceCard key={i} service={s} width={`${95 / arr.length}%`} />
                                 ) : ''}
                             </div>
                         </div>
@@ -121,7 +131,7 @@ export default function Home({ services }: Props) {
                 </div>
             </div>
 
-            <p className="home__p" style={{ textAlign: 'center', margin: '4rem 0 0', fontSize: '1.3rem' }}>
+            <p className="home__p" style={{ textAlign: 'center', margin: '4rem 0', fontSize: '1.3rem' }}>
                 <br /><br /><span style={{ fontSize: '1.6rem', fontWeight: 'bold', }}>WHATSAPP {isMobile ? <br /> : ''}+34 650 60 92 82</span>
             </p>
         </div>

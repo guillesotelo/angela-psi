@@ -21,6 +21,20 @@
 
     }
 
+    &__loading {
+        font-size: 1rem !important;
+        background-color: #276276e6;
+        width: fit-content;
+        padding: .6rem 0;
+        text-align: center;
+        border-radius: .3rem;
+        cursor: not-allowed;
+        transition: .2s;
+        border: none;
+        border: 1px solid transparent;
+        width: 100%;
+    }
+
     &__header {
         font-size: 1rem !important;
         font-weight: bold;
