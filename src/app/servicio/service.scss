@@ -4,6 +4,7 @@
         flex-direction: column;
         background-image: url(/assets/images/bg.png);
         min-height: 90vh;
+        padding-bottom: 10vh;
     }
 
     &__card {
@@ -83,8 +84,30 @@
 
 @media only screen and (max-width: 640px) {
     .service {
+        &__container {
+            padding: 0 0 10vh 0;
+        }
+
         &__title {
             width: auto;
+        }
+
+        &__card {
+            max-width: 90%;
+        }
+
+        &__price {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        &__form {
+            &-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     }
 }

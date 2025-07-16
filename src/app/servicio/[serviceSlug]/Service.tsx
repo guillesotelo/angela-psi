@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { dataObj, serviceType } from "src/app/types"
 import Button from "src/components/Button/Button";
 import InputField from "src/components/InputField/InputField";
@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import Dropdown from "src/components/Dropdown/Dropdown";
 import TextData from "src/components/TextData/TextData";
 import { getPrice } from "src/helpers";
+import { AppContext } from "src/app/context/AppContext";
 
 type Props = {
     service?: serviceType
@@ -34,6 +35,7 @@ export default function Service({ service }: Props) {
     const [checkoutLoading, setCheckoutLoading] = useState(false)
     const [openCalendar, setOpenCalendar] = useState(false)
     const [orderId, setOrderId] = useState('')
+    const { isMobile } = useContext(AppContext)
 
     const {
         title,
@@ -199,7 +201,7 @@ export default function Service({ service }: Props) {
                                             name="age"
                                             updateData={updateData}
                                             type="number"
-                                            style={{ width: '5rem' }} />
+                                            style={{ width: isMobile ? '' : '5rem' }} />
 
                                         <Dropdown
                                             label="País de residencia"
@@ -207,7 +209,7 @@ export default function Service({ service }: Props) {
                                             value={data.country}
                                             selected={data.country}
                                             setSelected={value => updateData('country', { target: { value } })}
-                                            style={{ width: '45rem' }}
+                                            style={{ width: isMobile ? '' : '45rem' }}
                                             maxHeight="25vh" />
                                         {title?.toLowerCase().includes('consulta individual') ?
                                             <Dropdown
@@ -216,7 +218,7 @@ export default function Service({ service }: Props) {
                                                 value={data.quantity || 1}
                                                 selected={data.quantity || 1}
                                                 setSelected={value => updateData('quantity', { target: { value } })}
-                                                style={{ width: '20rem' }}
+                                                style={{ width: isMobile ? '' : '20rem' }}
                                                 maxHeight="25vh" /> : ''}
                                         {openCalendar ?
                                             <Calendar
@@ -267,7 +269,7 @@ export default function Service({ service }: Props) {
                             handleClick={() => setShowForm(true)}
                             bgColor="#276276e6"
                             textColor="#fff"
-                            style={{}} />}
+                            style={{ marginTop: '1rem' }} />}
                     {showPayButton && !orderLoading ? <p>✅ Orden creada.</p> : ''}
                     {showPayButton ? //renderStripeButton()
                         <Button

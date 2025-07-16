@@ -104,7 +104,7 @@ export default function Home({ services }: Props) {
                 <div className="home__col" style={{ width: isMobile ? '95%' : '' }}>
                     <p className="home__text" style={{ margin: '2rem auto', fontSize: '2rem' }}><strong>SERVICIOS - PRECIOS - PROCEDIMIENTO DE CITA
                     </strong></p>
-                    <p className="home__p" style={{ textAlign: 'center' }}>
+                    <p className="home__p" style={{ textAlign: 'center', marginBottom: isMobile ? '4rem' : '' }}>
                         Como cualquier Servicio Profesional Virtual, se requiere pago anticipado completo, sin excepción.
                         Una vez efectuado el pago, envía el comprobante de transferencia por WhatsApp y coordinamos la cita.
                     </p>
@@ -132,7 +132,11 @@ export default function Home({ services }: Props) {
             </div>
 
             <p className="home__p" style={{ textAlign: 'center', margin: '4rem 0', fontSize: '1.3rem' }}>
-                <br /><br /><span style={{ fontSize: '1.6rem', fontWeight: 'bold', }}>WHATSAPP {isMobile ? <br /> : ''}+34 650 60 92 82</span>
+                <br /><br />
+                <a className="home__whatsapp-container" href="https://wa.me/+34650609282" target="_blank">
+                    <img className="home__whatsapp-svg" src="/assets/icons/whatsapp.svg" alt="Whatsapp" />
+                    <p>+34 650 60 92 82</p>
+                </a>
             </p>
         </div>
     </div>
