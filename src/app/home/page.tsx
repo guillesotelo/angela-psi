@@ -18,7 +18,7 @@ export default function Home({ services }: Props) {
                 <div className="home__service-item-wrapper">
                     <p className="home__service-item-title">{service.title}</p>
                 </div>
-                <p className="home__service-item-price">{`${getPrice(service.priceEUR)}`}</p>
+                {/* <p className="home__service-item-price">{`${getPrice(service.priceEUR)}`}</p> */}
                 <p className="home__service-item-text">{service.description}</p>
             </a>
         )
@@ -58,9 +58,9 @@ export default function Home({ services }: Props) {
                 <p className="home__text" style={{ margin: '4rem' }}><strong>¡Me entusiasma que hayamos coincidido aquí, recibe un afectuoso saludo!</strong></p>
             </div>
 
-            <div className="home__row" style={{ gap: '2rem' }}>
+            <div className="home__row" style={{ gap: isMobile ? '' : '2rem' }}>
                 <div className="home__col" style={{ width: isMobile ? '' : '45%' }}>
-                    <p className="home__p">
+                    <p className="home__p" style={{ marginBottom: isMobile ? '.25rem' : '' }}>
                         La Psicología es un medio para reflexionar, conocerse y encontrar un sano sentido a inquietudes sobre la existencia, bienestar, decisiones y relaciones. Su finalidad es ajustar, actualizar y enriquecer la experiencia de vida.
                         <br /><br />
                         Culminé mi carrera profesional en la Fundación Universitaria Konrad Lorenz en Bogotá - Colombia en el año 2000 y desde entonces he ganado valiosa experiencia asesorando, formando y fortaleciendo psicológicamente a individuos, grupos y organizaciones.
@@ -102,11 +102,10 @@ export default function Home({ services }: Props) {
             </div>
             <div className="home__row">
                 <div className="home__col" style={{ width: isMobile ? '95%' : '' }}>
-                    <p className="home__text" style={{ margin: '2rem auto', fontSize: '2rem' }}><strong>SERVICIOS - PRECIOS - PROCEDIMIENTO DE CITA
+                    <p className="home__text" style={{ margin: '2rem auto', fontSize: '2rem' }}><strong>SERVICIOS, PRECIOS Y PROCEDIMIENTO DE CITA
                     </strong></p>
                     <p className="home__p" style={{ textAlign: 'center', marginBottom: isMobile ? '4rem' : '' }}>
-                        Como cualquier Servicio Profesional Virtual, se requiere pago anticipado completo, sin excepción.
-                        Una vez efectuado el pago, envía el comprobante de transferencia por WhatsApp y coordinamos la cita.
+                        Elige un servicio, completa tus datos y reserva tu cita de manera fácil y rápida
                     </p>
 
                     <div className="home__row" style={{ gap: '2rem' }}>
