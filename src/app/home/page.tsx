@@ -104,7 +104,7 @@ export default function Home({ services }: Props) {
                 <div className="home__col" style={{ width: isMobile ? '95%' : '' }}>
                     <p className="home__text" style={{ margin: '2rem auto', fontSize: '2rem' }}><strong>SERVICIOS, PRECIOS Y PROCEDIMIENTO DE CITA
                     </strong></p>
-                    <p className="home__p" style={{ textAlign: 'center', marginBottom: isMobile ? '4rem' : '' }}>
+                    <p className="home__p" style={{ textAlign: 'center', marginBottom: isMobile ? '4rem' : '', width: '100%' }}>
                         Elige un servicio, completa tus datos y reserva tu cita de manera fácil y rápida
                     </p>
 

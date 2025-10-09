@@ -369,16 +369,22 @@ export default function Admin() {
                                     updateData={updateServiceData}
                                     value={service.priceEUR || ''}
                                     style={{ width: '8rem' }} />
+                                <Switch
+                                    label="Reservas múltiples"
+                                    on="Si"
+                                    off="No"
+                                    value={service.bulkBook}
+                                    setValue={value => updateServiceData('bulkBook', { target: { value } })} />
                                 <Dropdown
-                                    label="Descuento"
-                                    options={['0%'].concat(Array.from({ length: 10 }).map((_, i) => `${i ? i * 10 : 5}%`))}
+                                    label="Tipo de descuento"
+                                    options={['Sin descuento', '50% en la segunda hora']}
                                     value={service.discounts}
                                     selected={service.discounts}
                                     setSelected={value => updateServiceData('discounts', { target: { value } })}
                                     maxHeight="15vh" />
                                 <Dropdown
                                     label="Descuento aplica para"
-                                    options={['Todos', 'Colombia', 'España']}
+                                    options={['Todos', '', 'Colombia', 'España']}
                                     value={service.discountsApply || 'Todos'}
                                     selected={service.discountsApply || 'Todos'}
                                     setSelected={value => updateServiceData('discountsApply', { target: { value } })}

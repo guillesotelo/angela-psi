@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { loginUser } from '../../services'
 import { toast } from 'react-hot-toast';
 import InputField from '../../components/InputField/InputField';
@@ -15,7 +15,12 @@ export default function Login({ }: Props) {
     const [data, setData] = useState({ email: '', password: '' })
     const [loading, setLoading] = useState(false)
     const router = useRouter()
-    const { setIsLoggedIn } = useContext(AppContext)
+    const { setIsLoggedIn, isLoggedIn } = useContext(AppContext)
+
+    useEffect(() => {
+        console.log(isLoggedIn)
+        if(isLoggedIn) router.push('/admin')
+    },[isLoggedIn])
 
     const updateData = (key: string, e: onChangeEventType) => {
         const value = e.target.value

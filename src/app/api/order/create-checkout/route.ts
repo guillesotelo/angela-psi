@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
         }
 
         // Discount on 2nd hour
-        if (service.title.toLowerCase().includes('consulta individual') && quantity > 1) {
+        if (service.discounts.includes('50% en la segunda hora') && quantity === 2) {
             unit_amount = Number(service?.priceEUR) * quantity * .75
         }
 

@@ -6,7 +6,7 @@ export default function Policy({ }: Props) {
     return (
         <div className="policy__container">
             <h1 className='page__title'>Política de Privacidad</h1>
-            <p className='page__text'>Actualizado: 8 de julio, 2025</p>
+            <p className='page__text'>Actualizado: 8 de Octubre, 2025</p>
             <section>
                 <p className='page__text'>
                     En Ángela Sanguino García - Psicóloga Clínica, nos tomamos muy en serio tu privacidad. Esta Política de Privacidad explica cómo recopilamos, usamos y protegemos tus datos personales en cumplimiento con el Reglamento General de Protección de Datos (GDPR).
@@ -92,7 +92,7 @@ export default function Policy({ }: Props) {
                     Si tienes preguntas sobre esta Política de Privacidad, puedes escribirnos a la dirección de contacto disponible en nuestro sitio web.
                 </p>
             </section>
-            <footer>
+            <footer style={{ marginTop: '5rem' }}>
                 &copy; 2025 Ángela Sanguino García - Psicóloga Clínica. Todos los derechos reservados.
             </footer>
         </div>

@@ -47,7 +47,7 @@ export default function Service({ service }: Props) {
         buy_button_id,
         _id,
         discounts,
-        discountsApply
+        discountsApply,
     } = service || {}
 
     useEffect(() => {
@@ -143,15 +143,14 @@ export default function Service({ service }: Props) {
 
     const getPriceWithDiscounts = () => {
         let discountApplies = false
+        let price = Number(priceEUR)
 
         if (data.country && discountsApply) {
             discountApplies = discountsApply.toLowerCase().includes(data.country.toLowerCase())
                 || discountsApply.toLowerCase().includes('todos')
         }
-        let price = discounts && discountApplies ?
-            Number(priceEUR) * (100 - Number(discounts.replace('%', ''))) / 100 : Number(priceEUR)
 
-        if (title?.toLowerCase().includes('consulta individual') && data.quantity > 1) {
+        if (discounts && discounts.includes('50% en la segunda hora') && data.quantity == 2) {
             price = Number(priceEUR) * data.quantity * .75
         }
 
