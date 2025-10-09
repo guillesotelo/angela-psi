@@ -170,7 +170,7 @@ export default function DataTable(props: Props) {
                             }}>
                             {(header.value === 'createdAt' || header.value === 'updatedAt' || header.value === 'start' || header.value === 'end')
                                 && row[header.value] ? `${getDate(row[header.value])}` :
-                                header.value === 'active' || header.value === 'isSuper' ? row[header.value] ? 'Yes' : 'No' :
+                                header.value === 'active' || header.value === 'isSuper' ? row[header.value] ? 'Si' : 'No' :
                                     header.value === 'createdBy' ? row[header.value] ? `User: ${row[header.value]}` : 'App' :
                                         header.value === 'status' ? typeof row[header.value] === 'string' ? row[header.value] : row[header.value] ? 'UP' : 'DOWN' :
                                             header.value === 'message' ? row.userAlert && row[header.value] ? row[header.value] : row['message'] || '--' :
@@ -226,7 +226,7 @@ export default function DataTable(props: Props) {
                                                         }}>
                                                         {(header.value === 'createdAt' || header.value === 'updatedAt' || header.value === 'start' || header.value === 'end')
                                                             && row[header.value] ? `${getDate(row[header.value])}` :
-                                                            header.value === 'active' || header.value === 'isSuper' ? row[header.value] ? 'Yes' : 'No' :
+                                                            header.value === 'active' || header.value === 'isSuper' ? row[header.value] ? 'Si' : 'No' :
                                                                 header.value === 'createdBy' ? row[header.value] ? `User: ${row[header.value]}` : 'App' :
                                                                     header.value === 'status' ? row[header.value] ? 'UP' : 'DOWN' :
                                                                         header.value === 'message' ? row.userAlert && row[header.value] ? row[header.value] : row['message'] || '--' :

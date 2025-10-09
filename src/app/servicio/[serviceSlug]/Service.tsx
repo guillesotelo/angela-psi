@@ -48,6 +48,7 @@ export default function Service({ service }: Props) {
         _id,
         discounts,
         discountsApply,
+        bulkBook
     } = service || {}
 
     useEffect(() => {
@@ -150,8 +151,15 @@ export default function Service({ service }: Props) {
                 || discountsApply.toLowerCase().includes('todos')
         }
 
-        if (discounts && discounts.includes('50% en la segunda hora') && data.quantity == 2) {
+        if (discounts && discounts.includes('50% en la segunda hora') && data.quantity > 1) {
             price = Number(priceEUR) * data.quantity * .75
+            if (data.quantity > 2) {
+                // All regular price but one (the second hour)
+                price = Number(priceEUR) * (data.quantity - 1) + Number(priceEUR) * .5
+            } else {
+                // One regular price + 50% on the second
+                price = Number(priceEUR) + Number(priceEUR) * .5
+            }
         }
 
         return getPrice(price) || '-'
@@ -210,10 +218,10 @@ export default function Service({ service }: Props) {
                                             setSelected={value => updateData('country', { target: { value } })}
                                             style={{ width: isMobile ? '' : '45rem' }}
                                             maxHeight="25vh" />
-                                        {title?.toLowerCase().includes('consulta individual') ?
+                                        {bulkBook ?
                                             <Dropdown
                                                 label="Cantidad (horas)"
-                                                options={Array.from({ length: 2 }).map((_, i) => i + 1)}
+                                                options={Array.from({ length: 20 }).map((_, i) => i + 1)}
                                                 value={data.quantity || 1}
                                                 selected={data.quantity || 1}
                                                 setSelected={value => updateData('quantity', { target: { value } })}

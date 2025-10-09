@@ -6,7 +6,7 @@ import Modal from "src/components/Modal/Modal"
 import { bookingHeaders, COUNTRIES, serviceHeaders } from "src/constants"
 import { createOrder, createService, deleteOrder, deleteService, getAllBookings, getAllServices, updateBooking, updateService } from "src/services"
 import { dataObj } from "../types"
-import { convertToBase64, createSlug, getDate, getUser } from "src/helpers"
+import { convertToBase64, createSlug, getDate, getPrice, getUser } from "src/helpers"
 import toast from "react-hot-toast"
 import InputField from "src/components/InputField/InputField"
 import Dropdown from "src/components/Dropdown/Dropdown"
@@ -257,13 +257,28 @@ export default function Admin() {
         return !isPastDay
     }
 
-    const getDiscountPrice = () => {
-        if (service) {
-            if (service.discounts) {
-                return '€ ' + Number(service.priceEUR) * (100 - Number(service.discounts.replace('%', ''))) / 100
-            }
-            return service.priceEUR || ''
+
+    const getPriceWithDiscounts = () => {
+        const { priceEUR, discounts, discountsApply, country, quantity } = service || {}
+        let discountApplies = false
+        let price = Number(priceEUR)
+
+        if (country && discountsApply) {
+            discountApplies = discountsApply.toLowerCase().includes(country.toLowerCase())
+                || discountsApply.toLowerCase().includes('todos')
         }
+
+        if (discounts && discounts.includes('50% en la segunda hora') && quantity > 1) {
+            price = Number(priceEUR) * quantity * .75
+            if (quantity > 2) {
+                // All regular price but one (the second hour)
+                price = Number(priceEUR) * (quantity - 1) + Number(priceEUR) * .5
+            } else {
+                // One regular price + 50% on the second
+                price = Number(priceEUR) + Number(priceEUR) * .5
+            }
+        }
+        return getPrice(price) || '-'
     }
 
     return (
@@ -384,7 +399,7 @@ export default function Admin() {
                                     maxHeight="15vh" />
                                 <Dropdown
                                     label="Descuento aplica para"
-                                    options={['Todos', '', 'Colombia', 'España']}
+                                    options={['Todos', 'Colombia', 'España']}
                                     value={service.discountsApply || 'Todos'}
                                     selected={service.discountsApply || 'Todos'}
                                     setSelected={value => updateServiceData('discountsApply', { target: { value } })}
@@ -396,7 +411,7 @@ export default function Admin() {
                                     value={service.active}
                                     setValue={value => updateServiceData('active', { target: { value } })} />
                             </div>
-                            <TextData label="Precio con descuento" value={getDiscountPrice()} />
+                            {/* <TextData label="Precio con descuento" value={getPriceWithDiscounts()} /> */}
                             <p style={{ margin: '0', fontSize: '.8rem', color: '#696869' }}>Imagen</p>
                             <div className="service__form-row">
                                 <div style={{ display: 'flex' }}>

@@ -36,4 +36,5 @@ export type serviceType = {
     buy_button_id?: string
     discounts?: string
     discountsApply?: string
+    bulkBook?: boolean
 }
