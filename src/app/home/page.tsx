@@ -39,9 +39,9 @@ export default function Home({ services }: Props) {
                         <h1 className="home__subtitle">PSICÓLOGA CLÍNICA</h1>
                         <p className="home__text">Registro 001565 F.U.K.L. 2,000 Colombia</p>
                         <p className="home__profile-info-item"><strong><span className="home__profile-info-span">Experiencia: </span></strong>20 años</p>
-                        <p className="home__profile-info-item"><strong><span className="home__profile-info-span">Abordaje: </span></strong>Integrativo</p>
+                        <p className="home__profile-info-item"><strong><span className="home__profile-info-span">Abordaje: </span></strong>Integrativo Transpersonal</p>
                         <p className="home__profile-info-item"><strong><span className="home__profile-info-span">Modalidad: </span></strong>Individual y Grupal</p>
-                        <p className="home__profile-info-item"><strong><span className="home__profile-info-span">Población: </span></strong>Jóvenes, Adult@s, Pareja, Familia</p>
+                        <p className="home__profile-info-item"><strong><span className="home__profile-info-span">Población: </span></strong>Jóvenes, Adultos, Pareja, Familia</p>
                         <p className="home__profile-info-item"><strong><span className="home__profile-info-span">Encuentro: </span></strong>Online - Google Meet</p>
                         <p className="home__profile-info-item"><strong><span className="home__profile-info-span">Atención: </span></strong>Jueves a Martes (fin de semana inclusive)</p>
                         <p className="home__profile-info-item"><strong><span className="home__profile-info-span">Restricción: </span></strong>Servicio aún no homologado en España, aplica sólo en relación al Registro Profesional en Colombia</p>
@@ -60,7 +60,7 @@ export default function Home({ services }: Props) {
 
             <div className="home__row" style={{ gap: isMobile ? '' : '2rem' }}>
                 <div className="home__col" style={{ width: isMobile ? '' : '45%' }}>
-                    <p className="home__p" style={{ marginBottom: isMobile ? '.25rem' : '' }}>
+                    <p className="home__p" style={{ marginBottom: isMobile ? '.25rem' : '', textAlign: 'justify', lineHeight: '1.4rem' }}>
                         La Psicología es un medio para reflexionar, conocerse y encontrar un sano sentido a inquietudes sobre la existencia, bienestar, decisiones y relaciones. Su finalidad es ajustar, actualizar y enriquecer la experiencia de vida.
                         <br /><br />
                         Culminé mi carrera profesional en la Fundación Universitaria Konrad Lorenz en Bogotá - Colombia en el año 2000 y desde entonces he ganado valiosa experiencia asesorando, formando y fortaleciendo psicológicamente a individuos, grupos y organizaciones.
@@ -71,30 +71,47 @@ export default function Home({ services }: Props) {
                     </p>
                 </div>
                 <div className="home__col" style={{ width: isMobile ? '' : '45%' }}>
-                    <p className="home__p">
+                    <p className="home__p" style={{ textAlign: 'justify', lineHeight: '1.4rem' }}>
                         En este espacio profesional, seguro, libre de juicios, presiones e influencias externas podrás:
                         <br />
-                        <br />• Expresarte con libertad, sin sesgos ni manipulaciones.
-
-                        <br />• Distinguir entre la realidad y la fantasía interna proyectada sobre un agente externo a ti.
-
-                        <br />• Liberar tu identidad de distorsiones, condicionamientos limitantes y mecanismos de retraso.
-
-                        <br />• Identificar la causa raíz en las situaciones desafiantes, corregirlas con la comprensión del error psicológico y el uso de diversas estrategias y herramientas.
-
-                        <br />• Reflexionar sobre ti, tu vida, propósito y elecciones.
-
-                        <br />• Elegir pensamientos para encausar emociones y decisiones favorables.
-
-                        <br />• Liberar el uso sano, creativo y expansivo de la mente.
-
-                        <br />• Constatar que eres libre de ser feliz, vivir pleno y en paz.
-
-                        <br />• Expresar y actuar desde un estado mental pacífico con autenticidad, actuando en coherencia con tu propósito.
-
-                        <br />• Relacionarte sin complejos, en confianza y afecto genuino.
-
-                        <br />• Actuar según tus valores asumidos conscientemente.
+                        <ul>
+                            <li>
+                                Expresarte con libertad, sin sesgos ni manipulaciones.
+                            </li>
+                            <li>
+                                Expresarte con libertad, sin sesgos ni manipulaciones.
+                            </li>
+                            <li>
+                                Distinguir entre la realidad y la fantasía interna proyectada sobre un agente externo a ti.
+                            </li>
+                            <li>
+                                Liberar tu identidad de distorsiones, condicionamientos limitantes y mecanismos de retraso.
+                            </li>
+                            <li>
+                                Identificar la causa raíz en las situaciones desafiantes, corregirlas con la comprensión del error psicológico y el uso de diversas estrategias y herramientas.
+                            </li>
+                            <li>
+                                Reflexionar sobre ti, tu vida, propósito y elecciones.
+                            </li>
+                            <li>
+                                Elegir pensamientos para encausar emociones y decisiones favorables.
+                            </li>
+                            <li>
+                                Liberar el uso sano, creativo y expansivo de la mente.
+                            </li>
+                            <li>
+                                Constatar que eres libre de ser feliz, vivir pleno y en paz.
+                            </li>
+                            <li>
+                                Expresar y actuar desde un estado mental pacífico con autenticidad, actuando en coherencia con tu propósito.
+                            </li>
+                            <li>
+                                Relacionarte sin complejos, en confianza y afecto genuino.
+                            </li>
+                            <li>
+                                Actuar según tus valores asumidos conscientemente.
+                            </li>
+                        </ul>
                     </p>
                 </div>
             </div>

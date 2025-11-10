@@ -13,7 +13,7 @@ export const metadata: Metadata = {
         title,
         description,
         images: ['/logo_515x515.png'],
-        url: 'https://www.angela-psi-nine.vercel.app',
+        url: 'https://amorsinmiedo.com',
         type: 'website',
     },
     twitter: {
