@@ -3,7 +3,7 @@ import { buffer } from 'micro';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { retryWithDelay } from 'src/helpers';
 import Stripe from 'stripe';
-const API_URL = process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_LOCAL_API_URL
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 export const config = {
     api: {

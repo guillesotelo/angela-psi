@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { createSlug, getPrice } from "src/helpers";
 import { dataObj, serviceType } from "../types";
+import { marked } from 'marked';
 
 type Props = {
     services: dataObj
@@ -19,7 +20,7 @@ export default function Home({ services }: Props) {
                     <p className="home__service-item-title">{service.title}</p>
                 </div>
                 {/* <p className="home__service-item-price">{`${getPrice(service.priceEUR)}`}</p> */}
-                <p className="home__service-item-text">{service.description}</p>
+                <div className="home__service-item-text" dangerouslySetInnerHTML={{ __html: marked.parse(service.description) }} />
             </a>
         )
     }
@@ -71,7 +72,7 @@ export default function Home({ services }: Props) {
                     </p>
                 </div>
                 <div className="home__col" style={{ width: isMobile ? '' : '45%' }}>
-                    <p className="home__p" style={{ textAlign: 'justify', lineHeight: '1.4rem' }}>
+                    <div className="home__p" style={{ textAlign: 'justify', lineHeight: '1.4rem', margin: '1rem 0' }}>
                         En este espacio profesional, seguro, libre de juicios, presiones e influencias externas podrás:
                         <br />
                         <ul>
@@ -112,7 +113,7 @@ export default function Home({ services }: Props) {
                                 Actuar según tus valores asumidos conscientemente.
                             </li>
                         </ul>
-                    </p>
+                    </div>
                 </div>
             </div>
             <div className="home__row" style={{ borderTop: '3px solid #caddd8', width: '60%', margin: '2rem auto 0' }}>
@@ -147,13 +148,13 @@ export default function Home({ services }: Props) {
                 </div>
             </div>
 
-            <p className="home__p" style={{ textAlign: 'center', margin: '4rem 0', fontSize: '1.3rem' }}>
+            <div className="home__p" style={{ textAlign: 'center', margin: '4rem auto', fontSize: '1.3rem', width: 'fit-content' }}>
                 <br /><br />
                 <a className="home__whatsapp-container" href="https://wa.me/+34650609282" target="_blank">
                     <img className="home__whatsapp-svg" src="/assets/icons/whatsapp.svg" alt="Whatsapp" />
                     <p>+34 650 60 92 82</p>
                 </a>
-            </p>
+            </div>
         </div>
     </div>
 }

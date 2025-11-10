@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import axios from 'axios'
 import { getToken } from '../../(helpers)'
 
-const API_URL = process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_LOCAL_API_URL
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 export async function POST(request: NextRequest) {
     try {

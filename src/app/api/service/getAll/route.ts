@@ -5,7 +5,7 @@ import axios from 'axios'
 import { retryWithDelay } from 'src/helpers'
 import { getToken } from '../../(helpers)'
 
-const API_URL = process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_LOCAL_API_URL || 'http://localhost:3000'
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 export async function GET(request: NextRequest) {
     try {        
         const res = await retryWithDelay(() => axios.get(`${API_URL}/api/psiService/getAll`), 5, 100)
