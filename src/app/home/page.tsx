@@ -129,7 +129,7 @@ export default function Home({ services }: Props) {
                         <div className="home__service-group">
                             <p className="home__service-group-title">SESIONES PRIVADAS</p>
                             <div className="home__service-row">
-                                {services ? services.filter((s: serviceType) => s.type === 'privada' && s.active).map((s: serviceType, i: number, arr: dataObj[]) =>
+                                {services ? services.filter((s: serviceType) => s.type === 'Privada' && s.active).map((s: serviceType, i: number, arr: dataObj[]) =>
                                     <ServiceCard key={i} service={s} width={`${95 / arr.length}%`} />
                                 ) : ''}
                             </div>
@@ -138,7 +138,7 @@ export default function Home({ services }: Props) {
                         <div className="home__service-group">
                             <p className="home__service-group-title">SESIONES GRUPALES</p>
                             <div className="home__service-row">
-                                {services ? services.filter((s: serviceType) => s.type === 'grupal' && s.active).map((s: serviceType, i: number, arr: dataObj[]) =>
+                                {services ? services.filter((s: serviceType) => s.type === 'Grupal' && s.active).map((s: serviceType, i: number, arr: dataObj[]) =>
                                     <ServiceCard key={i} service={s} width={`${95 / arr.length}%`} />
                                 ) : ''}
                             </div>

@@ -18,7 +18,6 @@ export default function Login({ }: Props) {
     const { setIsLoggedIn, isLoggedIn } = useContext(AppContext)
 
     useEffect(() => {
-        console.log(isLoggedIn)
         if(isLoggedIn) router.push('/admin')
     },[isLoggedIn])
 

@@ -362,11 +362,13 @@ export default function Admin() {
                                     name="subtitle"
                                     value={service.subtitle || ''}
                                     updateData={updateServiceData} />
-                                <InputField
-                                    label="Tipo"
-                                    name="type"
-                                    value={service.type || ''}
-                                    updateData={updateServiceData} />
+                                <Dropdown
+                                    label="Tipo de descuento"
+                                    options={['Privada', 'Grupal']}
+                                    value={service.type}
+                                    selected={service.type}
+                                    setSelected={value => updateServiceData('type', { target: { value } })}
+                                    maxHeight="15vh" />
                             </div>
                             <div className="service__form-row">
                                 <InputField
