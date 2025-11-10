@@ -87,6 +87,7 @@ export default function Admin() {
                 if (saved && saved._id) {
                     toast.success('Cita guardada con exito!')
                     await getBookings()
+                    cancel()
                 }
                 else toast.error('Error al guardar cita. Prueba nuevamente')
             }
@@ -106,6 +107,7 @@ export default function Admin() {
                     setSelectedBooking(-1)
                     toast.success('Cita eliminada!')
                     await getBookings()
+                    cancel()
                 }
                 else toast.error('Error al eliminar la cita. Prueba nuevamente')
             }
@@ -130,6 +132,7 @@ export default function Admin() {
                 if (saved && saved._id) {
                     toast.success('Servicio guardado con exito!')
                     await getServices()
+                    cancel()
                 }
                 else toast.error('Error al guardar servicio. Prueba nuevamente')
             }
@@ -149,6 +152,7 @@ export default function Admin() {
                     setSelectedService(-1)
                     toast.success('Servicio eliminado!')
                     await getServices()
+                    cancel()
                 }
                 else toast.error('Error al eliminar el servicio. Prueba nuevamente')
             }
