@@ -28,10 +28,7 @@ export type serviceType = {
     type?: string
     active?: boolean
     image?: string
-    priceCOP?: string
-    priceCOP2?: string
     priceEUR?: string
-    priceEUR2?: string
     paymentLink?: string
     buy_button_id?: string
     discounts?: string

@@ -352,7 +352,7 @@ export default function Admin() {
                     title={`${service.title}`}
                     subtitle={service.subtitle || ''}
                     onClose={cancel}
-                    style={{ minHeight: '70vh' }}>
+                    style={{ minHeight: '70vh', minWidth: '40vw' }}>
                     <div className="admin__modal-content">
                         <div className="service__form" style={{ height: '60vh', justifyContent: 'space-between' }}>
                             <div className="service__form-row">
@@ -402,14 +402,16 @@ export default function Admin() {
                                     value={service.discounts}
                                     selected={service.discounts}
                                     setSelected={value => updateServiceData('discounts', { target: { value } })}
-                                    maxHeight="15vh" />
+                                    maxHeight="15vh"
+                                    style={{ minWidth: '10rem' }} />
                                 <Dropdown
                                     label="Descuento aplica para"
                                     options={['Todos', 'Colombia', 'España']}
                                     value={service.discountsApply || 'Todos'}
                                     selected={service.discountsApply || 'Todos'}
                                     setSelected={value => updateServiceData('discountsApply', { target: { value } })}
-                                    maxHeight="15vh" />
+                                    maxHeight="15vh"
+                                    style={{ minWidth: '10rem' }} />
                                 <Switch
                                     label="Activo"
                                     on="Si"
@@ -417,12 +419,15 @@ export default function Admin() {
                                     value={service.active}
                                     setValue={value => updateServiceData('active', { target: { value } })} />
                             </div>
+                            <p style={{ fontSize: '.8rem', fontStyle: 'italic', margin: 0 }}>Nota: Los descuentos para residentes colombianos se aplican automáticamente y no es necesario configurar ningún descuento aquí.</p>
                             {/* <TextData label="Precio con descuento" value={getPriceWithDiscounts()} /> */}
-                            <p style={{ margin: '0', fontSize: '.8rem', color: '#696869' }}>Imagen</p>
-                            <div className="service__form-row">
-                                <div style={{ display: 'flex' }}>
-                                    {service.image ? <img src={service.image} alt="Image" style={{ height: '4rem', marginRight: '1rem' }} /> : ''}
-                                    <input ref={imageUrlRef} type='file' accept='image/*' onChange={uploadImage} />
+                            <div style={{ border: '1px solid lightgray', padding: '1rem', width: 'fit-content', borderRadius: '.5rem' }}>
+                                <p style={{ margin: '0 0 .5rem 0', fontSize: '.8rem', color: '#696869' }}>Imagen</p>
+                                <div className="service__form-row">
+                                    <div style={{ display: 'flex' }}>
+                                        {service.image ? <img src={service.image} alt="Image" style={{ height: '8rem', marginRight: '1rem' }} /> : ''}
+                                        <input ref={imageUrlRef} type='file' accept='image/*' onChange={uploadImage} />
+                                    </div>
                                 </div>
                             </div>
                             <div className="service__form-row" style={{ marginTop: '2rem' }}>

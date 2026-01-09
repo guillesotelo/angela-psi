@@ -167,7 +167,7 @@ export const getCountryCode = async () => {
 
         const data = await response.json()
 
-        const countryCode = data.country_code.toLowerCase()
+        const countryCode = (data?.country_code || '').toLowerCase()
 
         return countryCode
     } catch (error) {

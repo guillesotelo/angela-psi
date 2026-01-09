@@ -11,7 +11,7 @@ import { createOrder } from "src/services";
 import toast from "react-hot-toast";
 import Dropdown from "src/components/Dropdown/Dropdown";
 import TextData from "src/components/TextData/TextData";
-import { getPrice } from "src/helpers";
+import { getCountryCode, getPrice } from "src/helpers";
 import { AppContext } from "src/app/context/AppContext";
 
 type Props = {
@@ -35,6 +35,7 @@ export default function Service({ service }: Props) {
     const [checkoutLoading, setCheckoutLoading] = useState(false)
     const [openCalendar, setOpenCalendar] = useState(false)
     const [orderId, setOrderId] = useState('')
+    const [colombianResident, setColombianResident] = useState<boolean | null>(null)
     const { isMobile } = useContext(AppContext)
 
     const {
@@ -57,10 +58,28 @@ export default function Service({ service }: Props) {
         script.async = true;
         document.body.appendChild(script);
 
+        getColombianDiscount()
+
         return () => {
             document.body.removeChild(script)
         };
     }, [])
+
+    useEffect(() => {
+        if (data.country && data.country === 'Colombia') {
+            if (colombianResident !== false) setColombianResident(true)
+        }
+    }, [data.country])
+
+    const getColombianDiscount = async () => {
+        try {
+            const countryCode = await getCountryCode()
+            if (countryCode === 'co') setColombianResident(true)
+        } catch (error) {
+            console.error(error)
+            setColombianResident(null)
+        }
+    }
 
     const updateData = (key: string, e: any) => {
         setData(prev => ({ ...prev, [key]: e.target.value }))
@@ -127,7 +146,8 @@ export default function Service({ service }: Props) {
                     _id,
                     quantity: data.quantity || 1,
                     voluntary: data.voluntary,
-                    country: data.country
+                    country: data.country,
+                    colombianResident
                 })
             })
 
@@ -146,19 +166,25 @@ export default function Service({ service }: Props) {
         let discountApplies = false
         let price = Number(priceEUR)
 
+        // Discount for Colombian residents
+        if (colombianResident) {
+            price = Number(priceEUR) * (data.quantity || 1) * .6
+        }
+
         if (data.country && discountsApply) {
             discountApplies = discountsApply.toLowerCase().includes(data.country.toLowerCase())
                 || discountsApply.toLowerCase().includes('todos')
         }
 
-        if (discounts && discounts.includes('50% en la segunda hora') && data.quantity > 1) {
-            price = Number(priceEUR) * data.quantity * .75
+        // Discounts on 2nd hour
+        if (discountApplies && discounts && discounts.includes('50% en la segunda hora') && data.quantity > 1) {
+            price = price * data.quantity * .75
             if (data.quantity > 2) {
                 // All regular price but one (the second hour)
-                price = Number(priceEUR) * (data.quantity - 1) + Number(priceEUR) * .5
+                price = price * (data.quantity - 1) + Number(priceEUR) * .5
             } else {
                 // One regular price + 50% on the second
-                price = Number(priceEUR) + Number(priceEUR) * .5
+                price = price + price * .5
             }
         }
 
@@ -174,9 +200,12 @@ export default function Service({ service }: Props) {
                     <div className="service__description" dangerouslySetInnerHTML={{ __html: description?.replace(/\n/g, "<br />") || '' }} />
                     <div className="service__price">
                         <p className="service__price-unit">Precio unitario: <strong>{getPrice(priceEUR) || '-'}</strong></p>
-                        {showForm ? <p className="service__price-total"> <strong>{getPriceWithDiscounts()}</strong></p> : ''}
+                        <div className="service__price-total-container">
+                            <p style={{ margin: 0 }}>Precio total:</p>
+                            <p className="service__price-total"> <strong>{getPriceWithDiscounts()}</strong></p>
+                        </div>
                     </div>
-
+                    {colombianResident ? <p style={{ color: '#276276e6', fontWeight: 'bold', fontStyle: 'italic', marginTop: '2rem', textAlign: 'center' }}>Se ha aplicado un descuento automático del 40% por ser residente colombiano!</p> : ''}
                     {showForm ?
                         <>
                             <h3>Información personal:</h3>

@@ -39,7 +39,7 @@ export default function Home({ services }: Props) {
                         <h1 className="home__title">ÁNGELA SANGUINO GARCÍA</h1>
                         <h1 className="home__subtitle">PSICÓLOGA CLÍNICA</h1>
                         <p className="home__text">Registro 001565 F.U.K.L. 2,000 Colombia</p>
-                        <p className="home__profile-info-item"><strong><span className="home__profile-info-span">Experiencia: </span></strong>20 años</p>
+                        <p className="home__profile-info-item"><strong><span className="home__profile-info-span">Experiencia: </span></strong>25 años</p>
                         <p className="home__profile-info-item"><strong><span className="home__profile-info-span">Abordaje: </span></strong>Integrativo Transpersonal</p>
                         <p className="home__profile-info-item"><strong><span className="home__profile-info-span">Modalidad: </span></strong>Individual y Grupal</p>
                         <p className="home__profile-info-item"><strong><span className="home__profile-info-span">Población: </span></strong>Jóvenes, Adultos, Pareja, Familia</p>
@@ -64,7 +64,7 @@ export default function Home({ services }: Props) {
                     <p className="home__p" style={{ marginBottom: isMobile ? '.25rem' : '', textAlign: 'justify', lineHeight: '1.4rem' }}>
                         La Psicología es un medio para reflexionar, conocerse y encontrar un sano sentido a inquietudes sobre la existencia, bienestar, decisiones y relaciones. Su finalidad es ajustar, actualizar y enriquecer la experiencia de vida.
                         <br /><br />
-                        Culminé mi carrera profesional en la Fundación Universitaria Konrad Lorenz en Bogotá - Colombia en el año 2000 y desde entonces he ganado valiosa experiencia asesorando, formando y fortaleciendo psicológicamente a individuos, grupos y organizaciones.
+                        Culminé la carrera profesional en la Fundación Universitaria Konrad Lorenz en Bogotá - Colombia en el año 2000 y desde entonces he ganado valiosa experiencia asesorando, formando y fortaleciendo psicológicamente a individuos, grupos y organizaciones.
                         <br /><br />
                         Mi formación comenzó en el Modelo Cognitivo Conductual, pero con el tiempo evolucioné hacia un Modelo más Integral e Introspectivo, donde la conducta, el sentimiento y la percepción es una manifestación de estados interpretativos internos o de conciencia y donde la mente es el único epicentro creativo y de transformación para diluir la responsabilidad a agentes externos.
                         <br /><br />
@@ -76,9 +76,6 @@ export default function Home({ services }: Props) {
                         En este espacio profesional, seguro, libre de juicios, presiones e influencias externas podrás:
                         <br />
                         <ul>
-                            <li>
-                                Expresarte con libertad, sin sesgos ni manipulaciones.
-                            </li>
                             <li>
                                 Expresarte con libertad, sin sesgos ni manipulaciones.
                             </li>
