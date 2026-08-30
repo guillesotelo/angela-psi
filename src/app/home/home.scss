@@ -65,6 +65,9 @@
     &__subtitle {
         margin: 0;
         text-align: center;
+        // Preserve the size it had while it was an <h1>
+        font-size: 2rem;
+        font-weight: bold;
     }
 
     &__text {

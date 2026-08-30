@@ -17,7 +17,7 @@ export default function Home({ services }: Props) {
         return (
             <a href={`/servicio/${createSlug(service.title || '')}`} className="home__service-item" style={{ width: isMobile ? '' : width }}>
                 <div className="home__service-item-wrapper">
-                    <p className="home__service-item-title">{service.title}</p>
+                    <h4 className="home__service-item-title">{service.title}</h4>
                 </div>
                 {/* <p className="home__service-item-price">{`${getPrice(service.priceEUR)}`}</p> */}
                 <div className="home__service-item-text" dangerouslySetInnerHTML={{ __html: marked.parse(service.description) }} />
@@ -31,13 +31,20 @@ export default function Home({ services }: Props) {
                 {!isMobile ?
                     <div className="home__col">
                         <div className="home__profile">
-                            <img className="home__profile-image" src='/assets/images/profile.png' draggable={false} />
+                            <img
+                                className="home__profile-image"
+                                src='/assets/images/profile.png'
+                                alt="Ángela Sanguino García, psicóloga clínica"
+                                width={230}
+                                height={272}
+                                draggable={false}
+                            />
                         </div>
                     </div> : ''}
                 <div className="home__col">
                     <div className="home__profile-info">
                         <h1 className="home__title">ÁNGELA SANGUINO GARCÍA</h1>
-                        <h1 className="home__subtitle">PSICÓLOGA CLÍNICA</h1>
+                        <h2 className="home__subtitle">PSICÓLOGA CLÍNICA</h2>
                         <p className="home__text">Registro 001565 F.U.K.L. 2,000 Colombia</p>
                         <p className="home__profile-info-item"><strong><span className="home__profile-info-span">Experiencia: </span></strong>25 años</p>
                         <p className="home__profile-info-item"><strong><span className="home__profile-info-span">Abordaje: </span></strong>Integrativo Transpersonal</p>
@@ -51,7 +58,14 @@ export default function Home({ services }: Props) {
                 {isMobile ?
                     <div className="home__col">
                         <div className="home__profile">
-                            <img className="home__profile-image" src='/assets/images/profile.png' draggable={false} />
+                            <img
+                                className="home__profile-image"
+                                src='/assets/images/profile.png'
+                                alt="Ángela Sanguino García, psicóloga clínica"
+                                width={230}
+                                height={272}
+                                draggable={false}
+                            />
                         </div>
                     </div> : ''}
             </div>
@@ -117,15 +131,14 @@ export default function Home({ services }: Props) {
             </div>
             <div className="home__row">
                 <div className="home__col" style={{ width: isMobile ? '95%' : '' }}>
-                    <p className="home__text" style={{ margin: '2rem auto', fontSize: '2rem' }}><strong>SERVICIOS, PRECIOS Y PROCEDIMIENTO DE CITA
-                    </strong></p>
+                    <h2 className="home__text" style={{ margin: '2rem auto', fontSize: '2rem' }}>SERVICIOS, PRECIOS Y PROCEDIMIENTO DE CITA</h2>
                     <p className="home__p" style={{ textAlign: 'center', marginBottom: isMobile ? '4rem' : '', width: '100%' }}>
                         Elige un servicio, completa tus datos y reserva tu cita de manera fácil y rápida
                     </p>
 
                     <div className="home__row" style={{ gap: '2rem' }}>
                         <div className="home__service-group">
-                            <p className="home__service-group-title">SESIONES PRIVADAS</p>
+                            <h3 className="home__service-group-title">SESIONES PRIVADAS</h3>
                             <div className="home__service-row">
                                 {services ? services.filter((s: serviceType) => s.type === 'Privada' && s.active).map((s: serviceType, i: number, arr: dataObj[]) =>
                                     <ServiceCard key={i} service={s} width={`${95 / arr.length}%`} />
@@ -134,7 +147,7 @@ export default function Home({ services }: Props) {
                         </div>
 
                         <div className="home__service-group">
-                            <p className="home__service-group-title">SESIONES GRUPALES</p>
+                            <h3 className="home__service-group-title">SESIONES GRUPALES</h3>
                             <div className="home__service-row">
                                 {services ? services.filter((s: serviceType) => s.type === 'Grupal' && s.active).map((s: serviceType, i: number, arr: dataObj[]) =>
                                     <ServiceCard key={i} service={s} width={`${95 / arr.length}%`} />
@@ -147,8 +160,8 @@ export default function Home({ services }: Props) {
 
             <div className="home__p" style={{ textAlign: 'center', margin: '4rem auto', fontSize: '1.3rem', width: 'fit-content' }}>
                 <br /><br />
-                <a className="home__whatsapp-container" href="https://wa.me/+34650609282" target="_blank">
-                    <img className="home__whatsapp-svg" src="/assets/icons/whatsapp.svg" alt="Whatsapp" />
+                <a className="home__whatsapp-container" href="https://wa.me/+34650609282" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp al +34 650 60 92 82">
+                    <img className="home__whatsapp-svg" src="/assets/icons/whatsapp.svg" alt="" aria-hidden="true" width={32} height={32} />
                     <p>+34 650 60 92 82</p>
                 </a>
             </div>

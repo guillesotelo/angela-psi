@@ -1,22 +1,33 @@
 "use client"
 
-import { useRouter, usePathname } from "next/navigation"
-import { useEffect, useState } from "react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+
+const LINKS = [
+    { href: '/', label: 'Home' },
+    { href: '/media', label: 'Podcasts' },
+]
 
 export default function Header() {
-    const [page, setPage] = useState('/')
-    const router = useRouter()
-    const pathName = usePathname()
-
-    useEffect(() => {
-        setPage(pathName || '/')
-    }, [pathName])
+    const pathName = usePathname() || '/'
 
     return (
-        <div className="header__container">
-            <p className="header__link" style={{ color: page === '/' ? '#1f9b7e' : '' }} onClick={() => router.push('/')}>Home</p>
-            <p>&nbsp;&nbsp;|&nbsp;&nbsp;</p>
-            <p className="header__link" style={{ color: page === '/media' ? '#1f9b7e' : '' }} onClick={() => router.push('/media')}>Podcasts</p>
-        </div>
+        <header className="header__container">
+            <nav className="header__nav" aria-label="Navegación principal">
+                {LINKS.map(({ href, label }, index) => (
+                    <span key={href}>
+                        {index > 0 ? <span aria-hidden="true">&nbsp;&nbsp;|&nbsp;&nbsp;</span> : null}
+                        <Link
+                            href={href}
+                            className="header__link"
+                            aria-current={pathName === href ? 'page' : undefined}
+                            style={{ color: pathName === href ? '#1f9b7e' : '' }}
+                        >
+                            {label}
+                        </Link>
+                    </span>
+                ))}
+            </nav>
+        </header>
     )
 }

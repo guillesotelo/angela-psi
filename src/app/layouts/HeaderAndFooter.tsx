@@ -6,9 +6,9 @@ const WithHeaderAndFooter: React.FC<{ children: React.ReactNode }> = ({ children
     return (
         <>
             <Header />
-            {/* <main className="page__container"> */}
-            {children}
-            {/* </main> */}
+            <main>
+                {children}
+            </main>
             <Footer />
         </>
     );

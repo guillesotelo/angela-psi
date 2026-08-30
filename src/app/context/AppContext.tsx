@@ -21,12 +21,8 @@ export const AppProvider = ({ children }: Props) => {
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null)
     const [darkMode, setDarkMode] = useState(false)
-    const [windowLoading, setWindowLoading] = useState(true)
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            setWindowLoading(false)
-        }
         setIsMobile(isMobileDevice())
 
         verifyUser()
@@ -79,7 +75,7 @@ export const AppProvider = ({ children }: Props) => {
     ])
 
 
-    return windowLoading ? null : <AppContext.Provider value={contextValue}>
+    return <AppContext.Provider value={contextValue}>
         {children}
     </AppContext.Provider>
 }

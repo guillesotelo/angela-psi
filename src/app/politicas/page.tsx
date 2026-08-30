@@ -1,4 +1,22 @@
 import React from 'react'
+import type { Metadata } from 'next'
+
+const title = 'Política de Privacidad'
+const description =
+    'Política de privacidad y tratamiento de datos personales conforme al RGPD para los servicios de psicología de Ángela Sanguino García.'
+
+export const metadata: Metadata = {
+    title,
+    description,
+    alternates: { canonical: '/politicas' },
+    robots: { index: true, follow: true },
+    openGraph: {
+        title,
+        description,
+        url: '/politicas',
+        type: 'article',
+    },
+}
 
 type Props = {}
 

@@ -8,9 +8,17 @@
         justify-content: flex-end;
     }
 
+    &__nav {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
     &__link {
         cursor: pointer;
         transition: .2s;
+        color: inherit;
+        text-decoration: none;
 
         &:hover {
             opacity: .7;
